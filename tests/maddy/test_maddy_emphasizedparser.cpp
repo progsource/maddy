@@ -20,3 +20,14 @@ TEST(MADDY_EMPHASIZEDPARSER, ItReplacesMarkdownWithEmphasizedHTML)
 
   ASSERT_EQ(expected, text);
 }
+
+TEST(MADDY_EMPHASIZEDPARSER, ItDoesNotParseInsideInlineCode)
+{
+  std::string text = "some text `*bla*` text testing *it* out";
+  std::string expected = "some text `*bla*` text testing <em>it</em> out";
+  auto emphasizedParser = std::make_shared<maddy::EmphasizedParser>();
+
+  emphasizedParser->Parse(text);
+
+  ASSERT_EQ(expected, text);
+}
