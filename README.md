@@ -5,7 +5,7 @@
 
 maddy is a C++ Markdown to HTML **header-only** parser library.
 
-## Supportes OS
+## Supported OS
 
 It actually should work on any OS, that supports the C++14 standard library.
 
