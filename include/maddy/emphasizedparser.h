@@ -41,7 +41,7 @@ public:
   void
   Parse(std::string& line) override
   {
-    static std::regex re("(?!`|<code>)\\*(?!`|</code>)([^\\*]*)\\*(?!`|</code>)");
+    static std::regex re("(?!.*`.*|.*<code>.*)\\*(?!.*`.*|.*<\\/code>.*)([^\\*]*)\\*(?!.*`.*|.*<\\/code>.*)");
     static std::string replacement = "<em>$1</em>";
 
     line = std::regex_replace(line, re, replacement);
