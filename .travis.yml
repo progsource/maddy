@@ -1,0 +1,17 @@
+dist: trusty
+sudo: false
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+
+script:
+  - mkdir tmp
+  - cd tmp
+  - cmake ..
+  - make
+  - ../build/MaddyTests

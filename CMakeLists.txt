@@ -1,4 +1,4 @@
-# This project is licensed under the MITlicense. For more information see the
+# This project is licensed under the MIT license. For more information see the
 # LICENSE file.
 
 cmake_minimum_required(VERSION 2.8)
