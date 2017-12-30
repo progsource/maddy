@@ -58,6 +58,7 @@ git submodule update --init --recursive
 mkdir tmp
 cd tmp
 cmake ..
+make
 make test # or run the executable in ../build/MaddyTests
 ```
 
