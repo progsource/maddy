@@ -27,7 +27,7 @@ fitting my needs. So I simply wrote my own one.
 
 The supported syntax can be found in the [definitions docs](docs/definitions.md).
 
-## HowTo use
+## How to use
 
 To use maddy in your project, simply add the include path of maddy to yours
 and in the code, you can then do the following:
@@ -41,6 +41,24 @@ and in the code, you can then do the following:
 std::stringstream markdownInput("");
 std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>();
 std::string htmlOutput = parser->Parse(markdownInput);
+```
+
+## How to run the tests
+
+*(tested on Linux with
+[git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and
+[cmake](https://cmake.org/install/) installed)*
+
+Open your preferred terminal and type:
+
+```shell
+git clone https://github.com/progsource/maddy.git
+cd maddy
+git submodule update --init --recursive
+mkdir tmp
+cd tmp
+cmake ..
+make test # or run the executable in ../build/MaddyTests
 ```
 
 ## How to contribute
