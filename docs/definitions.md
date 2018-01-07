@@ -58,7 +58,7 @@ results in
 
 ```
 
-* unorederd
+* unordered
   * list
   * items
     * in
@@ -69,14 +69,18 @@ results in
 results in
 ```html
 <ul>
-  <li>list</li>
-  <li>items
+  <li>unordered
     <ul>
-      <li>in</li>
-      <li>an</li>
+      <li>list</li>
+      <li>items
+        <ul>
+          <li>in</li>
+          <li>an</li>
+        </ul>
+      </li>
+      <li>hierarchy</li>
     </ul>
   </li>
-  <li>hierarchy</li>
 </ul>
 ```
 
@@ -89,13 +93,17 @@ results in
 * items
 
 ```
+
 results in
+
 ```html
+
 <ol>
   <li>ordered</li>
   <li>list</li>
   <li>items</li>
 </ol>
+
 ```
 
 ```
@@ -108,7 +116,9 @@ results in
   * hierarchy
 
 ```
+
 results in
+
 ```html
 <ol>
   <li>ordered</li>
@@ -116,7 +126,9 @@ results in
     <ol>
       <li>items</li>
       <li>in
-        <ol>an</ol>
+        <ol>
+          <li>an</li>
+        </ol>
       </li>
       <li>hierarchy</li>
     </ol>
