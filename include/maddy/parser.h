@@ -93,6 +93,18 @@ public:
       }
     }
 
+    // make sure, that all parsers are finished
+    if (currentBlockParser)
+    {
+      std::string emptyLine = "";
+      currentBlockParser->AddLine(emptyLine);
+      if (currentBlockParser->IsFinished())
+      {
+        result += currentBlockParser->GetResult().str();
+        currentBlockParser = nullptr;
+      }
+    }
+
     return result;
   }
 
