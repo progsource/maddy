@@ -1,5 +1,7 @@
 # maddy
 
+[![Join the chat at https://gitter.im/progsource/maddy](https://badges.gitter.im/progsource/maddy.svg)](https://gitter.im/progsource/maddy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-brightgreen.svg)](https://semver.org/)
 [![Build Status](https://travis-ci.org/progsource/maddy.svg?branch=master)](https://travis-ci.org/progsource/maddy)
