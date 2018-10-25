@@ -227,10 +227,20 @@ results in
 <strong>bold text</strong>
 ```
 
+## italic
+
+```
+*italic text*
+```
+results in
+```html
+<i>italic text</i>
+```
+
 ## emphasized
 
 ```
-*emphasized text*
+_emphasized text_
 ```
 results in
 ```html
