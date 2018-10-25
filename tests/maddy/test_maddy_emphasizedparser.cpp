@@ -12,7 +12,7 @@
 
 TEST(MADDY_EMPHASIZEDPARSER, ItReplacesMarkdownWithEmphasizedHTML)
 {
-  std::string text = "some text *bla* text testing *it* out";
+  std::string text = "some text _bla_ text testing _it_ out";
   std::string expected = "some text <em>bla</em> text testing <em>it</em> out";
   auto emphasizedParser = std::make_shared<maddy::EmphasizedParser>();
 
@@ -23,7 +23,7 @@ TEST(MADDY_EMPHASIZEDPARSER, ItReplacesMarkdownWithEmphasizedHTML)
 
 TEST(MADDY_EMPHASIZEDPARSER, ItDoesNotParseInsideInlineCode)
 {
-  std::string text = "some text `*bla*` `/**text*/` testing *it* out";
+  std::string text = "some text `*bla*` `/**text*/` testing _it_ out";
   std::string expected = "some text `*bla*` `/**text*/` testing <em>it</em> out";
   auto emphasizedParser = std::make_shared<maddy::EmphasizedParser>();
 

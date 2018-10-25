@@ -25,6 +25,7 @@
 #include "maddy/emphasizedparser.h"
 #include "maddy/imageparser.h"
 #include "maddy/inlinecodeparser.h"
+#include "maddy/italicparser.h"
 #include "maddy/linkparser.h"
 #include "maddy/strikethroughparser.h"
 #include "maddy/strongparser.h"
@@ -56,6 +57,7 @@ public:
     : emphasizedParser(std::make_shared<EmphasizedParser>())
     , imageParser(std::make_shared<ImageParser>())
     , inlineCodeParser(std::make_shared<InlineCodeParser>())
+    , italicParser(std::make_shared<ItalicParser>())
     , linkParser(std::make_shared<LinkParser>())
     , strikeThroughParser(std::make_shared<StrikeThroughParser>())
     , strongParser(std::make_shared<StrongParser>())
@@ -112,6 +114,7 @@ private:
   std::shared_ptr<EmphasizedParser> emphasizedParser;
   std::shared_ptr<ImageParser> imageParser;
   std::shared_ptr<InlineCodeParser> inlineCodeParser;
+  std::shared_ptr<ItalicParser> italicParser;
   std::shared_ptr<LinkParser> linkParser;
   std::shared_ptr<StrikeThroughParser> strikeThroughParser;
   std::shared_ptr<StrongParser> strongParser;
@@ -131,6 +134,8 @@ private:
     this->strikeThroughParser->Parse(line);
 
     this->inlineCodeParser->Parse(line);
+
+    this->italicParser->Parse(line);
   }
 
   std::shared_ptr<BlockParser>

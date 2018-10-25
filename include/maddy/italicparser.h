@@ -18,21 +18,19 @@ namespace maddy {
 // -----------------------------------------------------------------------------
 
 /**
- * EmphasizedParser
- *
- * Has to be used after the `StrongParser`.
+ * ItalicParser
  *
  * @class
  */
-class EmphasizedParser : public LineParser
+class ItalicParser : public LineParser
 {
 public:
   /**
    * Parse
    *
-   * From Markdown: `text _text_`
+   * From Markdown: `text *text*`
    *
-   * To HTML: `text <em>text</em>`
+   * To HTML: `text <i>text</i>`
    *
    * @method
    * @param {std::string&} line The line to interpret
@@ -41,12 +39,11 @@ public:
   void
   Parse(std::string& line) override
   {
-    static std::regex re("(?!.*`.*|.*<code>.*)\\_(?!.*`.*|.*<\\/code>.*)([^\\_]*)\\_(?!.*`.*|.*<\\/code>.*)");
-    static std::string replacement = "<em>$1</em>";
-
+    std::regex re("(?!.*`.*|.*<code>.*)\\*(?!.*`.*|.*<\\/code>.*)([^\\*]*)\\*(?!.*`.*|.*<\\/code>.*)");
+    static std::string replacement = "<i>$1</i>";
     line = std::regex_replace(line, re, replacement);
   }
-}; // class EmphasizedParser
+}; // class ItalicParser
 
 // -----------------------------------------------------------------------------
 
