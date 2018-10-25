@@ -221,9 +221,11 @@ results in
 
 ```
 **bold text**
+__bold text__
 ```
 results in
 ```html
+<strong>bold text</strong>
 <strong>bold text</strong>
 ```
 

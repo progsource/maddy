@@ -30,9 +30,9 @@ public:
   /**
    * Parse
    *
-   * From Markdown: `text **text**`
+   * From Markdown: `text **text** __text__`
    *
-   * To HTML: `text <strong>text</strong>`
+   * To HTML: `text <strong>text</strong> <strong>text</strong>`
    *
    * @method
    * @param {std::string&} line The line to interpret
@@ -41,10 +41,16 @@ public:
   void
   Parse(std::string& line) override
   {
-    static std::regex re("(?!.*`.*|.*<code>.*)\\*\\*(?!.*`.*|.*<\\/code>.*)([^\\*\\*]*)\\*\\*(?!.*`.*|.*<\\/code>.*)");
+    static std::vector<std::regex> res
+    {
+      std::regex{"(?!.*`.*|.*<code>.*)\\*\\*(?!.*`.*|.*<\\/code>.*)([^\\*\\*]*)\\*\\*(?!.*`.*|.*<\\/code>.*)"},
+      std::regex{"(?!.*`.*|.*<code>.*)\\_\\_(?!.*`.*|.*<\\/code>.*)([^\\_\\_]*)\\_\\_(?!.*`.*|.*<\\/code>.*)"}
+    };
     static std::string replacement = "<strong>$1</strong>";
-
-    line = std::regex_replace(line, re, replacement);
+    for (const auto& re : res)
+    {
+      line = std::regex_replace(line, re, replacement);
+    }
   }
 }; // class StrongParser
 
