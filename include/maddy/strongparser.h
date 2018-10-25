@@ -44,7 +44,7 @@ public:
     static std::vector<std::regex> res
     {
       std::regex{"(?!.*`.*|.*<code>.*)\\*\\*(?!.*`.*|.*<\\/code>.*)([^\\*\\*]*)\\*\\*(?!.*`.*|.*<\\/code>.*)"},
-      std::regex{"(?!.*`.*|.*<code>.*)\\_\\_(?!.*`.*|.*<\\/code>.*)([^\\_\\_]*)\\_\\_(?!.*`.*|.*<\\/code>.*)"}
+      std::regex{"(?!.*`.*|.*<code>.*)__(?!.*`.*|.*<\\/code>.*)([^__]*)__(?!.*`.*|.*<\\/code>.*)"}
     };
     static std::string replacement = "<strong>$1</strong>";
     for (const auto& re : res)
