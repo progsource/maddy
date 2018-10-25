@@ -13,7 +13,7 @@ it's that simple.\n\
 \n\
 * an unordered list\n\
   * with some **hierarchy**\n\
-    1. and an *ordered*\n\
+    1. and an _ordered_\n\
     * list\n\
     * directly\n\
   * inside\n\
