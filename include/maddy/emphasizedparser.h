@@ -30,7 +30,7 @@ public:
   /**
    * Parse
    *
-   * From Markdown: `text *text*`
+   * From Markdown: `text _text_`
    *
    * To HTML: `text <em>text</em>`
    *
@@ -41,7 +41,7 @@ public:
   void
   Parse(std::string& line) override
   {
-    static std::regex re("(?!.*`.*|.*<code>.*)\\*(?!.*`.*|.*<\\/code>.*)([^\\*]*)\\*(?!.*`.*|.*<\\/code>.*)");
+    static std::regex re("(?!.*`.*|.*<code>.*)\\_(?!.*`.*|.*<\\/code>.*)([^\\_]*)\\_(?!.*`.*|.*<\\/code>.*)");
     static std::string replacement = "<em>$1</em>";
 
     line = std::regex_replace(line, re, replacement);
