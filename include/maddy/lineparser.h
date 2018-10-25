@@ -23,6 +23,13 @@ class LineParser
 {
 public:
   /**
+   * dtor
+   *
+   * @method
+   */
+  virtual ~LineParser() {}
+
+  /**
    * Parse
    *
    * From Markdown to HTML
