@@ -46,6 +46,13 @@ public:
   {}
 
   /**
+   * dtor
+   *
+   * @method
+   */
+  virtual ~BlockParser() {}
+
+  /**
    * AddLine
    *
    * Adding a line which has to be parsed.
