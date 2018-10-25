@@ -1,14 +1,22 @@
-dist: trusty
 sudo: false
 language: cpp
-compiler: g++
-install: export CXX="g++-6"
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-6
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      sudo: require
+      addons:
+        apt:
+          sources:
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+before_install:
+  # This is necessary to solve https://github.com/travis-ci/travis-ci/issues/9649
+  - eval "${MATRIX_EVAL}"
 
 script:
   - mkdir tmp
