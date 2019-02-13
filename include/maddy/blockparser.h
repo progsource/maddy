@@ -9,6 +9,9 @@
 #include <functional>
 #include <sstream>
 #include <string>
+// windows compatibility includes
+#include <cctype>
+#include <algorithm>
 
 // -----------------------------------------------------------------------------
 
