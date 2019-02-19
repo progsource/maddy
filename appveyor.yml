@@ -8,5 +8,8 @@ before_build:
   - cmd: cd tmp
   - cmd: cmake -G "Visual Studio 15 Win64" ..
 
+build:
+  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
+
 test_script:
   - cmd: ctest -VV -C "Release"
