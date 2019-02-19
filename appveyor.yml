@@ -3,7 +3,7 @@ image: Visual Studio 2017
 build_script:
   - cmd: mkdir tmp
   - cmd: cd tmp
-  - cmd: cmake -G "Visual Studio 2017" ..
+  - cmd: cmake -G "Visual Studio 15 Win64" ..
 
 test_script:
   - cmd: cd tmp
