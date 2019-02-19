@@ -1,8 +1,9 @@
 # maddy
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-brightgreen.svg)](https://semver.org/)
-[![Build Status](https://travis-ci.org/progsource/maddy.svg?branch=master)](https://travis-ci.org/progsource/maddy)
+[![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-brightgreen.svg)](https://semver.org/)
+[![Travis Build Status](https://travis-ci.org/progsource/maddy.svg?branch=master)](https://travis-ci.org/progsource/maddy)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/04m0lg27kigv1pg8/branch/master?svg=true)](https://ci.appveyor.com/project/progsource/maddy/branch/master)
 
 maddy is a C++ Markdown to HTML **header-only** parser library.
 
