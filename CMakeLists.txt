@@ -33,7 +33,7 @@ if (UNIX)
 else()
   set(
     CMAKE_CXX_FLAGS
-    "${CMAKE_CXX_FLAGS} -g -std=c++${MADDY_CPP_VERSION} -fno-rtti -fno-exceptions -fsanitize=address -fno-omit-frame-pointer"
+    "${CMAKE_CXX_FLAGS} -std=c++${MADDY_CPP_VERSION}"
   )
 endif()
 
