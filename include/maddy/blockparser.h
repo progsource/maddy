@@ -157,24 +157,26 @@ protected:
   {
     bool hasMetNonSpace = false;
 
-    uint32_t indentation = std::count_if(
-      line.begin(),
-      line.end(),
-      [&hasMetNonSpace](unsigned char c)
-      {
-        if (hasMetNonSpace)
+    uint32_t indentation = static_cast<uint32_t>(
+      std::count_if(
+        line.begin(),
+        line.end(),
+        [&hasMetNonSpace](unsigned char c)
         {
+          if (hasMetNonSpace)
+          {
+            return false;
+          }
+
+          if (std::isspace(c))
+          {
+            return true;
+          }
+
+          hasMetNonSpace = true;
           return false;
         }
-
-        if (std::isspace(c))
-        {
-          return true;
-        }
-
-        hasMetNonSpace = true;
-        return false;
-      }
+      )
     );
 
     return indentation;
