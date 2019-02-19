@@ -9,5 +9,4 @@ build_script:
   - cmd: cmake -G "Visual Studio 15 Win64" ..
 
 test_script:
-  - cmd: cd tmp
-  - ctest -VV -C "Release"
+  - cmd: ctest -VV -C "Release"
