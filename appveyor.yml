@@ -3,7 +3,7 @@ image: Visual Studio 2017
 install:
   - cmd: git submodule update --init --recursive
 
-build_script:
+before_build:
   - cmd: mkdir tmp
   - cmd: cd tmp
   - cmd: cmake -G "Visual Studio 15 Win64" ..
