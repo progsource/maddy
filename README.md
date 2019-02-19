@@ -14,8 +14,8 @@ It actually should work on any OS, that supports the C++14 standard library.
 It is tested to work on:
 
 * Linux (gcc)
-- OSX (clang)
-- Windows (Visual Studio 2017)
+* OSX (clang)
+* Windows (Visual Studio 2017)
 
 ## Dependencies
 
