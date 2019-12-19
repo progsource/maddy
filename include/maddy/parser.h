@@ -22,6 +22,7 @@
 #include "maddy/unorderedlistparser.h"
 
 // LineParser
+#include "maddy/breaklineparser.h"
 #include "maddy/emphasizedparser.h"
 #include "maddy/imageparser.h"
 #include "maddy/inlinecodeparser.h"
@@ -54,7 +55,8 @@ public:
    * @method
    */
   Parser()
-    : emphasizedParser(std::make_shared<EmphasizedParser>())
+    : breakLineParser(std::make_shared<BreakLineParser>())
+    , emphasizedParser(std::make_shared<EmphasizedParser>())
     , imageParser(std::make_shared<ImageParser>())
     , inlineCodeParser(std::make_shared<InlineCodeParser>())
     , italicParser(std::make_shared<ItalicParser>())
@@ -111,6 +113,7 @@ public:
   }
 
 private:
+  std::shared_ptr<BreakLineParser> breakLineParser;
   std::shared_ptr<EmphasizedParser> emphasizedParser;
   std::shared_ptr<ImageParser> imageParser;
   std::shared_ptr<InlineCodeParser> inlineCodeParser;
@@ -136,6 +139,8 @@ private:
     this->inlineCodeParser->Parse(line);
 
     this->italicParser->Parse(line);
+
+    this->breakLineParser->Parse(line);
   }
 
   std::shared_ptr<BlockParser>

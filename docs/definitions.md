@@ -269,6 +269,17 @@ results in
 <hr/>
 ```
 
+## break line
+
+```
+New\r\nLine
+```
+results in
+```html
+New<br>
+Line
+```
+
 ## Images
 
 ```
