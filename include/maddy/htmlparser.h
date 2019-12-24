@@ -18,11 +18,11 @@ namespace maddy {
 // -----------------------------------------------------------------------------
 
 /**
- * ParagraphParser
+ * HtmlParser
  *
  * @class
  */
-class ParagraphParser : public BlockParser
+class HtmlParser : public BlockParser
 {
 public:
   /**
@@ -32,22 +32,21 @@ public:
    * @param {std::function<void(std::string&)>} parseLineCallback
    * @param {std::function<std::shared_ptr<BlockParser>(const std::string& line)>} getBlockParserForLineCallback
    */
-   ParagraphParser(
+   HtmlParser(
     std::function<void(std::string&)> parseLineCallback,
     std::function<std::shared_ptr<BlockParser>(const std::string& line)> getBlockParserForLineCallback
   )
     : BlockParser(parseLineCallback, getBlockParserForLineCallback)
     , isStarted(false)
     , isFinished(false)
+    , isGreaterThanFound(false)
   {}
 
   /**
    * IsStartingLine
    *
-   * If the line is not empty and does not start with `<`, it will be a
-   * paragraph.
-   *
-   * This block parser has to always run as the last one!
+   * If the line is starting with `<`, HTML is expected to follow.
+   * Nothing after that will be parsed, it only is copied.
    *
    * @method
    * @param {const std::string&} line
@@ -56,13 +55,13 @@ public:
   static bool
   IsStartingLine(const std::string& line)
   {
-    return !line.empty() && line[0] != '<';
+    return line[0] == '<';
   }
 
   /**
    * IsFinished
    *
-   * An empty line will end the paragraph.
+   * `>` followed by an empty line will end the HTML block.
    *
    * @method
    * @return {bool}
@@ -83,7 +82,7 @@ protected:
   bool
   isLineParserAllowed() const override
   {
-    return true;
+    return false;
   }
 
   void
@@ -91,25 +90,37 @@ protected:
   {
     if (!this->isStarted)
     {
-      line = "<p>" + line + " ";
       this->isStarted = true;
+    }
+
+    if (!line.empty() && line[line.size() - 1] == '>')
+    {
+      this->isGreaterThanFound = true;
       return;
     }
 
-    if (line.empty())
+    if (line.empty() && this->isGreaterThanFound)
     {
-      line += "</p>";
       this->isFinished = true;
       return;
     }
 
-    line += " ";
+    if (!line.empty() && this->isGreaterThanFound)
+    {
+      this->isGreaterThanFound = false;
+    }
+
+    if (!line.empty())
+    {
+      line += " ";
+    }
   }
 
 private:
   bool isStarted;
   bool isFinished;
-}; // class ParagraphParser
+  bool isGreaterThanFound;
+}; // class HtmlParser
 
 // -----------------------------------------------------------------------------
 

@@ -15,6 +15,7 @@
 #include "maddy/codeblockparser.h"
 #include "maddy/headlineparser.h"
 #include "maddy/horizontallineparser.h"
+#include "maddy/htmlparser.h"
 #include "maddy/orderedlistparser.h"
 #include "maddy/paragraphparser.h"
 #include "maddy/quoteparser.h"
@@ -194,6 +195,10 @@ private:
     else if (maddy::UnorderedListParser::IsStartingLine(line))
     {
       parser = this->createUnorderedListParser();
+    }
+    else if (maddy::HtmlParser::IsStartingLine(line))
+    {
+      parser = std::make_shared<maddy::HtmlParser>(nullptr, nullptr);
     }
     else if (maddy::ParagraphParser::IsStartingLine(line))
     {

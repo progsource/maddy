@@ -7,6 +7,9 @@ destroy the output, if there was HTML in your markdown.
 The Parser expects you to use spaces and not tabs for indentation in the
 markdown.
 
+If a line starts with `<` it expects that the upcoming line is HTML and therefor
+will not be surrounded by a paragraph.
+
 ## Headlines
 
 ```
