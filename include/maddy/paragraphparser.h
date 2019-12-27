@@ -56,7 +56,7 @@ public:
   static bool
   IsStartingLine(const std::string& line)
   {
-    return !line.empty() && line[0] != '<';
+    return !line.empty();
   }
 
   /**

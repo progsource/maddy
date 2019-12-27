@@ -37,19 +37,6 @@ TEST_F(MADDY_PARAGRAPHPARSER, IsFinishedReturnsFalseInTheBeginning)
   ASSERT_FALSE(pParser->IsFinished());
 }
 
-TEST_F(MADDY_PARAGRAPHPARSER, IsStartingLineRetrunsFalseIfLineStartsWithSmallerThan)
-{
-  const std::vector<std::string> markdown = {
-    "<a name=\"to top\"></a>"
-    , "<div id=\"test\">some special element</div>"
-  };
-
-  for (size_t i = 0; i < markdown.size(); ++i)
-  {
-    ASSERT_FALSE(maddy::ParagraphParser::IsStartingLine(markdown[i]));
-  }
-}
-
 TEST_F(MADDY_PARAGRAPHPARSER, ItReplacesMarkdownWithAnHtmlLine)
 {
   std::vector<std::string> markdown = {

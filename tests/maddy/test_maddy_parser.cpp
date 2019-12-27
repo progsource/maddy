@@ -19,3 +19,18 @@ TEST(MADDY_PARSER, ItShouldParse)
 
   ASSERT_EQ(testHtml, output);
 }
+
+TEST(MADDY_PARSER, ItShouldParseWithConfig)
+{
+  auto config = std::make_shared<maddy::ParserConfig>();
+  config->isEmphasizedParserEnabled = false;
+  config->isHTMLWrappedInParagraph = false;
+
+  auto parser = std::make_shared<maddy::Parser>(config);
+
+  std::stringstream markdown(testMarkdown);
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(testHtml2, output);
+}

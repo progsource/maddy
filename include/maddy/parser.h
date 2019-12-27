@@ -10,6 +10,8 @@
 #include <functional>
 #include <string>
 
+#include "maddy/parserconfig.h"
+
 // BlockParser
 #include "maddy/checklistparser.h"
 #include "maddy/codeblockparser.h"
@@ -55,8 +57,9 @@ public:
    *
    * @method
    */
-  Parser()
-    : breakLineParser(std::make_shared<BreakLineParser>())
+  Parser(std::shared_ptr<ParserConfig> config = nullptr)
+    : config(config)
+    , breakLineParser(std::make_shared<BreakLineParser>())
     , emphasizedParser(std::make_shared<EmphasizedParser>())
     , imageParser(std::make_shared<ImageParser>())
     , inlineCodeParser(std::make_shared<InlineCodeParser>())
@@ -114,6 +117,7 @@ public:
   }
 
 private:
+  std::shared_ptr<ParserConfig> config;
   std::shared_ptr<BreakLineParser> breakLineParser;
   std::shared_ptr<EmphasizedParser> emphasizedParser;
   std::shared_ptr<ImageParser> imageParser;
@@ -133,7 +137,11 @@ private:
 
     // Attention! StrongParser has to be before EmphasizedParser
     this->strongParser->Parse(line);
-    this->emphasizedParser->Parse(line);
+
+    if (!this->config || this->config->isEmphasizedParserEnabled)
+    {
+      this->emphasizedParser->Parse(line);
+    }
 
     this->strikeThroughParser->Parse(line);
 
@@ -196,7 +204,11 @@ private:
     {
       parser = this->createUnorderedListParser();
     }
-    else if (maddy::HtmlParser::IsStartingLine(line))
+    else if (
+      this->config &&
+      !this->config->isHTMLWrappedInParagraph &&
+      maddy::HtmlParser::IsStartingLine(line)
+    )
     {
       parser = std::make_shared<maddy::HtmlParser>(nullptr, nullptr);
     }
