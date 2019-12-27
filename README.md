@@ -1,7 +1,7 @@
 # maddy
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-brightgreen.svg)](https://semver.org/)
+[![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-brightgreen.svg)](https://semver.org/)
 [![Travis Build Status](https://travis-ci.org/progsource/maddy.svg?branch=master)](https://travis-ci.org/progsource/maddy)
 [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/04m0lg27kigv1pg8/branch/master?svg=true)](https://ci.appveyor.com/project/progsource/maddy/branch/master)
 
@@ -42,7 +42,13 @@ and in the code, you can then do the following:
 #include "maddy/parser.h"
 
 std::stringstream markdownInput("");
-std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>();
+
+// config is optional
+std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
+config->isEmphasizedParserEnabled = true; // default
+config->isHTMLWrappedInParagraph = true; // default
+
+std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
 std::string htmlOutput = parser->Parse(markdownInput);
 ```
 
