@@ -42,7 +42,13 @@ and in the code, you can then do the following:
 #include "maddy/parser.h"
 
 std::stringstream markdownInput("");
-std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>();
+
+// config is optional
+std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
+config->isEmphasizedParserEnabled = true; // default
+config->isHTMLWrappedInParagraph = true; // default
+
+std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
 std::string htmlOutput = parser->Parse(markdownInput);
 ```
 

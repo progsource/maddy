@@ -44,8 +44,7 @@ public:
   /**
    * IsStartingLine
    *
-   * If the line is not empty and does not start with `<`, it will be a
-   * paragraph.
+   * If the line is not empty, it will be a paragraph.
    *
    * This block parser has to always run as the last one!
    *

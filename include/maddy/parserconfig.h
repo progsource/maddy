@@ -22,7 +22,7 @@ struct ParserConfig
 
   ParserConfig()
     : isEmphasizedParserEnabled(true)
-    , isHTMLWrappedInParagraph(false)
+    , isHTMLWrappedInParagraph(true)
   {}
 }; // class ParserConfig
 
