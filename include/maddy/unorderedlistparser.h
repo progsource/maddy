@@ -54,7 +54,7 @@ public:
   static bool
   IsStartingLine(const std::string& line)
   {
-    static std::regex re("^\\* .*");
+    static std::regex re("^[+*-] .*");
     return std::regex_match(line, re);
   }
 
@@ -89,7 +89,7 @@ protected:
     bool isStartOfNewListItem = IsStartingLine(line);
     uint32_t indentation = getIndentationWidth(line);
 
-    static std::regex lineRegex("^(\\* )");
+    static std::regex lineRegex("^([+*-] )");
     line = std::regex_replace(line, lineRegex, "");
 
     if (!this->isStarted)

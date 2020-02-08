@@ -44,11 +44,13 @@ results in
 ## Lists
 
 ### unordered
+Characters "*", "+" or "-" to make an unordered "bullet" list are equivalent.
+
 ```
 
-* unordered
+- unordered
 * list
-* items
++ items
 
 ```
 results in
@@ -66,8 +68,8 @@ results in
   * list
   * items
     * in
-    * an
-  * hierarchy
+    + an
+  - hierarchy
 
 ```
 results in

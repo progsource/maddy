@@ -55,9 +55,14 @@ TEST_F(MADDY_UNORDEREDLISTPARSER, ItReplacesMarkdownWithAnHtmlUnorderedList)
   std::vector<std::string> markdown = {
     "* a"
     , "* b"
+	, "- c"
+	, "- d"
+	, "+ e"
+	, "+ f"
+	, "* g"
     , ""
   };
-  std::string expected = "<ul><li>a</li><li>b</li></ul>";
+  std::string expected = "<ul><li>a</li><li>b</li><li>c</li><li>d</li><li>e</li><li>f</li><li>g</li></ul>";
 
   for (std::string md : markdown)
   {
@@ -80,9 +85,12 @@ TEST_F(MADDY_UNORDEREDLISTPARSER, ItReplacesMarkdownWithAnHierachicalHtmlList)
     , "  * e"
     , "* b"
     , "  * c"
+	, "  + x"
+	, "  + y"
+	, "  - z"
     , ""
   };
-  std::string expected = "<ul><li>a<ul><li>d</li><li>e</li></ul></li><li>b<ul><li>c</li></ul></li></ul>";
+  std::string expected = "<ul><li>a<ul><li>d</li><li>e</li></ul></li><li>b<ul><li>c</li><li>x</li><li>y</li><li>z</li></ul></li></ul>";
 
   for (std::string md : markdown)
   {
