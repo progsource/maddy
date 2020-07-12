@@ -73,11 +73,11 @@ public:
    * Parse
    *
    * @method
-   * @param {const std::stringstream&} markdown
+   * @param {const std::istream&} markdown
    * @return {std::string} HTML
    */
   std::string
-  Parse(std::stringstream& markdown) const
+  Parse(std::istream& markdown) const
   {
     std::string result = "";
     std::shared_ptr<BlockParser> currentBlockParser = nullptr;
