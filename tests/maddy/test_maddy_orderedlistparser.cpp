@@ -96,3 +96,26 @@ TEST_F(MADDY_ORDEREDLISTPARSER, ItReplacesMarkdownWithAnHierachicalHtmlList)
 
   ASSERT_EQ(expected, outputString);
 }
+
+TEST_F(MADDY_ORDEREDLISTPARSER, ItReplacesNumberedMarkdownListWithAnHtmlOrderedList)
+{
+  std::vector<std::string> markdown = {
+    "1. a"
+    , "94. b"
+    , "103. c"
+    , ""
+  };
+  std::string expected = "<ol><li>a</li><li>b</li><li>c</li></ol>";
+
+  for (std::string md : markdown)
+  {
+    olParser->AddLine(md);
+  }
+
+  ASSERT_TRUE(olParser->IsFinished());
+
+  std::stringstream& output(olParser->GetResult());
+  const std::string& outputString = output.str();
+
+  ASSERT_EQ(expected, outputString);
+}
