@@ -95,6 +95,26 @@ results in
 ```
 
 1. ordered
+2. list
+3. items
+
+```
+
+results in
+
+```html
+
+<ol>
+  <li>ordered</li>
+  <li>list</li>
+  <li>items</li>
+</ol>
+
+```
+
+```
+
+1. ordered
 * list
 * items
 
