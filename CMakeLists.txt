@@ -60,10 +60,9 @@ add_subdirectory(libs)
 
 # ------------------------------------------------------------------------------
 
-include_directories(
-  ${LIBS_INCLUDE_DIRS}
+add_library(maddy INTERFACE)
+target_include_directories(maddy INTERFACE
   ${MADDY_INCLUDE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/tests
 )
 
 # ------------------------------------------------------------------------------
@@ -73,5 +72,9 @@ add_executable(
     ${MADDY_TESTS_FILES}
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/main.cpp
 )
-target_link_libraries(MaddyTests gmock_main)
+target_include_directories(MaddyTests PUBLIC
+  ${LIBS_INCLUDE_DIRS}
+  ${CMAKE_CURRENT_SOURCE_DIR}/tests
+)
+target_link_libraries(MaddyTests maddy gmock_main)
 add_test(MaddyTests ${CMAKE_CURRENT_SOURCE_DIR}/build/MaddyTests)

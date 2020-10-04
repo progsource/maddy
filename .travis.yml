@@ -28,5 +28,5 @@ script:
   - mkdir tmp
   - cd tmp
   - cmake ..
-  - make
+  - make -j4
   - ../build/MaddyTests
