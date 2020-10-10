@@ -78,3 +78,5 @@ There are different possibilities:
 * [Create a GitHub issue](https://github.com/progsource/maddy/issues/new)
 * Create a pull request with an own branch (don't forget to put yourself in the
   AUTHORS file)
+
+Please also read [CONTIBUTING.md](CONTIBUTING.md).
