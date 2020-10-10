@@ -79,4 +79,4 @@ There are different possibilities:
 * Create a pull request with an own branch (don't forget to put yourself in the
   AUTHORS file)
 
-Please also read [CONTIBUTING.md](CONTIBUTING.md).
+Please also read [CONTRIBUTING.md](CONTRIBUTING.md).
