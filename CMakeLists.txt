@@ -1,7 +1,7 @@
 # This project is licensed under the MIT license. For more information see the
 # LICENSE file.
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.25)
 
 project(maddy)
 
@@ -54,8 +54,6 @@ endif()
 
 # ------------------------------------------------------------------------------
 
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/gtest/googlemock)
 add_subdirectory(libs)
 
 # ------------------------------------------------------------------------------

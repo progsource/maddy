@@ -1,14 +1,11 @@
 # This project is licensed under the MIT license. For more information see the
 # LICENSE file.
 
-cmake_minimum_required(VERSION 2.8)
+include(FetchContent)
 
-set(LIBS_INCLUDE_DIRS
-# -- googletest / -mock --------------------------------------------------------
-  ${CMAKE_CURRENT_SOURCE_DIR}/gtest/googletest/include
-  ${CMAKE_CURRENT_SOURCE_DIR}/gtest/googlemock/include
-# ------------------------------------------------------------------------------
-PARENT_SCOPE)
-
-set(LIBS_SRC_FILES
-PARENT_SCOPE)
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        b796f7d44681514f58a683a3a71ff17c94edb0c1 # v1.13.0
+)
+FetchContent_MakeAvailable(googletest)

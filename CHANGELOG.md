@@ -16,6 +16,8 @@ maddy uses [semver versioning](https://semver.org/).
 
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Added Changelog
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Added contribution guideline
+* ![**CHANGED**](https://img.shields.io/badge/-CHANGED-%23e90) updated cmake minimum required version to 3.25
+* ![**CHANGED**](https://img.shields.io/badge/-CHANGED-%23e90) gtest is now loaded via cmake and not a git submodule any longer - updated gtest version to 1.13.0
 * ?
 
 ## version 1.1.2 2020-10-04
