@@ -25,4 +25,4 @@ target_include_directories(MaddyTests PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}
 )
 target_link_libraries(MaddyTests maddy gmock_main)
-add_test(MaddyTests MaddyTests)
+add_test(NAME MaddyTests COMMAND MaddyTests)

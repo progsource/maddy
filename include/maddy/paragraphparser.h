@@ -34,11 +34,13 @@ public:
    */
    ParagraphParser(
     std::function<void(std::string&)> parseLineCallback,
-    std::function<std::shared_ptr<BlockParser>(const std::string& line)> getBlockParserForLineCallback
+    std::function<std::shared_ptr<BlockParser>(const std::string& line)> getBlockParserForLineCallback,
+    bool isEnabled
   )
     : BlockParser(parseLineCallback, getBlockParserForLineCallback)
     , isStarted(false)
     , isFinished(false)
+    , isEnabled(isEnabled)
   {}
 
   /**
@@ -88,16 +90,28 @@ protected:
   void
   parseBlock(std::string& line) override
   {
-    if (!this->isStarted)
+    if (this->isEnabled && !this->isStarted)
     {
       line = "<p>" + line + " ";
       this->isStarted = true;
       return;
     }
+    else if (!this->isEnabled && !this->isStarted)
+    {
+      line += " ";
+      this->isStarted = true;
+      return;
+    }
 
-    if (line.empty())
+    if (this->isEnabled && line.empty())
     {
       line += "</p>";
+      this->isFinished = true;
+      return;
+    }
+    else if (!this->isEnabled && line.empty())
+    {
+      line += "<br/>";
       this->isFinished = true;
       return;
     }
@@ -108,6 +122,7 @@ protected:
 private:
   bool isStarted;
   bool isFinished;
+  bool isEnabled;
 }; // class ParagraphParser
 
 // -----------------------------------------------------------------------------

@@ -20,7 +20,8 @@ protected:
   {
     this->pParser = std::make_shared<maddy::ParagraphParser>(
       nullptr,
-      nullptr
+      nullptr,
+      true
     );
   }
 };

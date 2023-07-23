@@ -34,3 +34,33 @@ TEST(MADDY_PARSER, ItShouldParseWithConfig)
 
   ASSERT_EQ(testHtml2, output);
 }
+
+TEST(MADDY_PARSER, ItShouldParseWithBitwiseConfig)
+{
+  auto config = std::make_shared<maddy::ParserConfig>();
+  config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER;
+  config->enabledParsers |= maddy::types::HTML_PARSER;
+
+  auto parser = std::make_shared<maddy::Parser>(config);
+
+  std::stringstream markdown(testMarkdown);
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(testHtml2, output);
+}
+
+TEST(MADDY_PARSER, ItShouldParseWithSmallConfig)
+{
+  auto config = std::make_shared<maddy::ParserConfig>();
+  config->enabledParsers = maddy::types::EMPHASIZED_PARSER |
+                           maddy::types::STRONG_PARSER;
+
+  auto parser = std::make_shared<maddy::Parser>(config);
+
+  std::stringstream markdown(testMarkdown);
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(testHtml3, output);
+}

@@ -2,8 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-brightgreen.svg)](https://semver.org/)
-[![Travis Build Status](https://travis-ci.org/progsource/maddy.svg?branch=master)](https://travis-ci.org/progsource/maddy)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/04m0lg27kigv1pg8/branch/master?svg=true)](https://ci.appveyor.com/project/progsource/maddy/branch/master)
 
 maddy is a C++ Markdown to HTML **header-only** parser library.
 
@@ -45,12 +43,16 @@ std::stringstream markdownInput("");
 
 // config is optional
 std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
-config->isEmphasizedParserEnabled = true; // default
-config->isHTMLWrappedInParagraph = true; // default
+// config->isEmphasizedParserEnabled = false; // default true - this flag is deprecated
+// config->isHTMLWrappedInParagraph = false; // default true - this flag is deprecated
+config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER;
+config->enabledParsers |= maddy::types::HTML_PARSER;
 
 std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
 std::string htmlOutput = parser->Parse(markdownInput);
 ```
+
+You can find all parser flags in [`include/maddy/parserconfig.h`](include/maddy/parserconfig.h).
 
 ## How to run the tests
 
