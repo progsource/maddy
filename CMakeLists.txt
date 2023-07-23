@@ -1,11 +1,9 @@
 # This project is licensed under the MIT license. For more information see the
 # LICENSE file.
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.25)
 
 project(maddy)
-
-enable_testing()
 
 # ------------------------------------------------------------------------------
 
@@ -20,8 +18,15 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 # ------------------------------------------------------------------------------
 
+option(MADDY_BUILD_WITH_TESTS "enable building tests" OFF)
+
+if(${MADDY_BUILD_WITH_TESTS})
+  enable_testing()
+endif()
+
+# ------------------------------------------------------------------------------
+
 set(MADDY_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
-file(GLOB_RECURSE MADDY_TESTS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/tests/maddy/*.cpp)
 
 # ------------------------------------------------------------------------------
 
@@ -29,11 +34,6 @@ if (UNIX)
   set(
     CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} -g -std=c++${MADDY_CPP_VERSION} -Wall -Wpedantic -Wextra -Wno-ignored-qualifiers -fno-rtti -fno-exceptions -fsanitize=address -fno-omit-frame-pointer"
-  )
-else()
-  set(
-    CMAKE_CXX_FLAGS
-    "${CMAKE_CXX_FLAGS} -std=c++${MADDY_CPP_VERSION}"
   )
 endif()
 
@@ -54,12 +54,6 @@ endif()
 
 # ------------------------------------------------------------------------------
 
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/gtest/googlemock)
-add_subdirectory(libs)
-
-# ------------------------------------------------------------------------------
-
 add_library(maddy INTERFACE)
 target_include_directories(maddy INTERFACE
   ${MADDY_INCLUDE_DIR}
@@ -67,14 +61,6 @@ target_include_directories(maddy INTERFACE
 
 # ------------------------------------------------------------------------------
 
-add_executable(
-  MaddyTests
-    ${MADDY_TESTS_FILES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/main.cpp
-)
-target_include_directories(MaddyTests PUBLIC
-  ${LIBS_INCLUDE_DIRS}
-  ${CMAKE_CURRENT_SOURCE_DIR}/tests
-)
-target_link_libraries(MaddyTests maddy gmock_main)
-add_test(MaddyTests ${CMAKE_CURRENT_SOURCE_DIR}/build/MaddyTests)
+if(${MADDY_BUILD_WITH_TESTS})
+  add_subdirectory(tests)
+endif()
