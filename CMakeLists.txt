@@ -5,8 +5,6 @@ cmake_minimum_required(VERSION 3.25)
 
 project(maddy)
 
-enable_testing()
-
 # ------------------------------------------------------------------------------
 
 set(MADDY_CPP_VERSION 14)
@@ -20,8 +18,15 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 # ------------------------------------------------------------------------------
 
+option(MADDY_ENABLED_TESTS "enable building tests" OFF)
+
+if(${MADDY_ENABLED_TESTS})
+  enable_testing()
+endif()
+
+# ------------------------------------------------------------------------------
+
 set(MADDY_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
-file(GLOB_RECURSE MADDY_TESTS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/tests/maddy/*.cpp)
 
 # ------------------------------------------------------------------------------
 
@@ -54,10 +59,6 @@ endif()
 
 # ------------------------------------------------------------------------------
 
-add_subdirectory(libs)
-
-# ------------------------------------------------------------------------------
-
 add_library(maddy INTERFACE)
 target_include_directories(maddy INTERFACE
   ${MADDY_INCLUDE_DIR}
@@ -65,14 +66,6 @@ target_include_directories(maddy INTERFACE
 
 # ------------------------------------------------------------------------------
 
-add_executable(
-  MaddyTests
-    ${MADDY_TESTS_FILES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/main.cpp
-)
-target_include_directories(MaddyTests PUBLIC
-  ${LIBS_INCLUDE_DIRS}
-  ${CMAKE_CURRENT_SOURCE_DIR}/tests
-)
-target_link_libraries(MaddyTests maddy gmock_main)
-add_test(MaddyTests ${CMAKE_CURRENT_SOURCE_DIR}/build/MaddyTests)
+if(${MADDY_ENABLED_TESTS})
+  add_subdirectory(tests)
+endif()

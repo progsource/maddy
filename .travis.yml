@@ -27,6 +27,6 @@ before_install:
 script:
   - mkdir tmp
   - cd tmp
-  - cmake ..
+  - cmake -DMADDY_ENABLED_TESTS=ON ..
   - make -j4
   - ../build/MaddyTests
