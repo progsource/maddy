@@ -15,7 +15,7 @@ It is tested to work on:
 
 * Linux (gcc)
 * OSX (clang)
-* Windows (Visual Studio 2017, mingw)
+* Windows (Visual Studio 17 2022, mingw)
 
 ## Dependencies
 
@@ -65,7 +65,7 @@ git clone https://github.com/progsource/maddy.git
 cd maddy
 mkdir tmp
 cd tmp
-cmake -DMADDY_ENABLED_TESTS=ON ..
+cmake -DMADDY_BUILD_WITH_TESTS=ON ..
 make
 make test # or run the executable in ../build/MaddyTests
 ```

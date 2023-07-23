@@ -18,9 +18,9 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 # ------------------------------------------------------------------------------
 
-option(MADDY_ENABLED_TESTS "enable building tests" OFF)
+option(MADDY_BUILD_WITH_TESTS "enable building tests" OFF)
 
-if(${MADDY_ENABLED_TESTS})
+if(${MADDY_BUILD_WITH_TESTS})
   enable_testing()
 endif()
 
@@ -34,11 +34,6 @@ if (UNIX)
   set(
     CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} -g -std=c++${MADDY_CPP_VERSION} -Wall -Wpedantic -Wextra -Wno-ignored-qualifiers -fno-rtti -fno-exceptions -fsanitize=address -fno-omit-frame-pointer"
-  )
-else()
-  set(
-    CMAKE_CXX_FLAGS
-    "${CMAKE_CXX_FLAGS} -std=c++${MADDY_CPP_VERSION}"
   )
 endif()
 
@@ -66,6 +61,6 @@ target_include_directories(maddy INTERFACE
 
 # ------------------------------------------------------------------------------
 
-if(${MADDY_ENABLED_TESTS})
+if(${MADDY_BUILD_WITH_TESTS})
   add_subdirectory(tests)
 endif()
