@@ -21,6 +21,9 @@ maddy uses [semver versioning](https://semver.org/).
 * ![**CHANGED**](https://img.shields.io/badge/-CHANGED-%23e90) tests are only run if the cmake option `MADDY_BUILD_WITH_TESTS` is on, moved test cmake code to the `tests` subfolder
 * ![**REMOVED**](https://img.shields.io/badge/-REMOVED-%23900) travis CI and appveyor
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) GitHub workflow
+* ![**DEPRECATED**](https://img.shields.io/badge/-DEPRECATED-%23666) config flags `isEmphasizedParserEnabled` and `isHTMLWrappedInParagraph`
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) config flag `enabledParsers` to en-/disable each parser separately
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) class attribute to code blocks if there is text after the three backticks like ` ```cpp`
 * ?
 
 ## version 1.1.2 2020-10-04

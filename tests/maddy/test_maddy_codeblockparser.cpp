@@ -59,3 +59,26 @@ TEST_F(MADDY_CODEBLOCKPARSER, ItReplacesMarkdownWithAnHtmlCodeBlock)
 
   ASSERT_EQ(expected, outputString);
 }
+
+TEST_F(MADDY_CODEBLOCKPARSER, ItShouldUseAnythingBehindFirstBackticksAsClass)
+{
+  std::vector<std::string> markdown = {
+    "```cpp"
+    , "some code"
+    , "some other code"
+    , "```"
+  };
+
+  std::string expected = "<pre class=\"cpp\"><code>\nsome code\nsome other code\n</code></pre>";
+
+  for (std::string md : markdown)
+  {
+    cbParser->AddLine(md);
+  }
+  ASSERT_TRUE(cbParser->IsFinished());
+
+  std::stringstream& output(cbParser->GetResult());
+  const std::string& outputString = output.str();
+
+  ASSERT_EQ(expected, outputString);
+}
