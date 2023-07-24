@@ -74,7 +74,7 @@ public:
   static bool
   IsStartingLine(const std::string& line)
   {
-    static std::regex re("^(?:`){3}$");
+    static std::regex re("^(?:`){3}(.*)$");
     return std::regex_match(line, re);
   }
 
@@ -122,6 +122,13 @@ protected:
         this->isStarted = false;
         return;
       }
+    }
+    else if (!this->isStarted && line.substr(0, 3) == "```")
+    {
+      line = "<pre class=\"" + line.substr(3) + "\"><code>\n";
+      this->isStarted = true;
+      this->isFinished = false;
+      return;
     }
 
     line += "\n";

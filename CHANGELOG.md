@@ -23,6 +23,7 @@ maddy uses [semver versioning](https://semver.org/).
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) GitHub workflow
 * ![**DEPRECATED**](https://img.shields.io/badge/-DEPRECATED-%23666) config flags `isEmphasizedParserEnabled` and `isHTMLWrappedInParagraph`
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) config flag `enabledParsers` to en-/disable each parser separately
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) class attribute to code blocks if there is text after the three backticks like ` ```cpp`
 * ?
 
 ## version 1.1.2 2020-10-04
