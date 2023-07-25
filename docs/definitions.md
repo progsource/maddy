@@ -222,6 +222,18 @@ some code
 </code></pre>
 ```
 
+    ```cpp
+    int a = 42;
+    ```
+
+results in
+
+```html
+<pre class="cpp"><code>
+int a = 42;
+</code></pre>
+```
+
 ## Inline code
 
     some text `some inline code` some other text
