@@ -18,6 +18,7 @@
 #include "maddy/headlineparser.h"
 #include "maddy/horizontallineparser.h"
 #include "maddy/htmlparser.h"
+#include "maddy/latexblockparser.h"
 #include "maddy/orderedlistparser.h"
 #include "maddy/paragraphparser.h"
 #include "maddy/quoteparser.h"
@@ -255,6 +256,17 @@ private:
     )
     {
       parser = std::make_shared<maddy::CodeBlockParser>(
+        nullptr,
+        nullptr
+      );
+    }
+    else if (
+      this->config &&
+      (this->config->enabledParsers & maddy::types::LATEX_BLOCK_PARSER) != 0 &&
+      maddy::LatexBlockParser::IsStartingLine(line)
+    )
+    {
+      parser = std::make_shared<LatexBlockParser>(
         nullptr,
         nullptr
       );
