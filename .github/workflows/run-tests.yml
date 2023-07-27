@@ -25,6 +25,7 @@ jobs:
       - name: run tests
         run: |
           ./build/MaddyTests
+
   test-on-windows:
     runs-on: windows-latest
     steps:
@@ -42,6 +43,7 @@ jobs:
       - name: run tests
         run: |
           ./build/Debug/MaddyTests.exe
+
   test-on-osx:
     runs-on: macos-latest
     steps:

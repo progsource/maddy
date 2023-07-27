@@ -7,22 +7,19 @@ project(maddy)
 
 # ------------------------------------------------------------------------------
 
-set(MADDY_CPP_VERSION 14)
-add_definitions(-DCPP_VERSION=${MADDY_CPP_VERSION})
-
-# ------------------------------------------------------------------------------
-
 set(CMAKE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 # ------------------------------------------------------------------------------
 
-option(MADDY_BUILD_WITH_TESTS "enable building tests" OFF)
+option(MADDY_BUILD_WITH_TESTS "enable building tests - does not work with zip download" OFF)
 
 if(${MADDY_BUILD_WITH_TESTS})
   enable_testing()
 endif()
+
+option(MADDY_CREATE_PACKAGE "create a package for a version release" OFF)
 
 # ------------------------------------------------------------------------------
 
@@ -30,26 +27,13 @@ set(MADDY_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 
 # ------------------------------------------------------------------------------
 
-if (UNIX)
-  set(
-    CMAKE_CXX_FLAGS
-    "${CMAKE_CXX_FLAGS} -g -std=c++${MADDY_CPP_VERSION} -Wall -Wpedantic -Wextra -Wno-ignored-qualifiers -fno-rtti -fno-exceptions -fsanitize=address -fno-omit-frame-pointer"
-  )
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
 endif()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ------------------------------------------------------------------------------
-
-if (UNIX AND NOT APPLE)
-  execute_process(COMMAND ${CMAKE_CXX_COMPILER}
-                  -fuse-ld=gold -Wl,--version
-                  ERROR_QUIET OUTPUT_VARIABLE ld_version)
-  if ("${ld_version}" MATCHES "GNU gold")
-    message(STATUS "Found Gold linker, use faster linker")
-    set(CMAKE_EXE_LINKER_FLAGS
-        "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=gold")
-    set(CMAKE_SHARED_LINKER_FLAGS
-        "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=gold ")
-  endif()
+if(${CMAKE_CXX_STANDARD} LESS 14)
+  message(FATAL_ERROR "maddy requires >=C++14")
 endif()
 
 # ------------------------------------------------------------------------------
@@ -63,4 +47,15 @@ target_include_directories(maddy INTERFACE
 
 if(${MADDY_BUILD_WITH_TESTS})
   add_subdirectory(tests)
+endif()
+
+# ------------------------------------------------------------------------------
+
+if(${MADDY_CREATE_PACKAGE})
+  set(MADDY_PACKAGE_FILES include/ CMakeLists.txt LICENSE)
+  add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-src.zip
+    COMMAND ${CMAKE_COMMAND} -E tar c ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-src.zip --format=zip -- ${MADDY_PACKAGE_FILES}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPENDS ${MADDY_PACKAGE_FILES})
+  add_custom_target(${PROJECT_NAME}_package DEPENDS ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-src.zip)
 endif()

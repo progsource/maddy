@@ -41,7 +41,7 @@ public:
   void
   Parse(std::string& line) override
   {
-    static std::regex re("\\!\\[([^\\]]*)\\]\\(([^\\]]*)\\)");
+    static std::regex re(R"(\!\[([^\]]*)\]\(([^\]]*)\))");
     static std::string replacement = "<img src=\"$2\" alt=\"$1\"/>";
 
     line = std::regex_replace(line, re, replacement);

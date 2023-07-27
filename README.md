@@ -1,7 +1,7 @@
 # maddy
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-brightgreen.svg)](https://semver.org/)
+[![Version: 1.2.0](https://img.shields.io/badge/Version-1.1.2-brightgreen.svg)](https://semver.org/)
 
 maddy is a C++ Markdown to HTML **header-only** parser library.
 
@@ -21,12 +21,39 @@ It is tested to work on:
 
 ## Why maddy?
 
-When I was needing a Markdown parser in C++ I couldn't find any, that was
+When I was looking for a Markdown parser in C++, I couldn't find any, that was
 fitting my needs. So I simply wrote my own one.
 
 ## Markdown syntax
 
 The supported syntax can be found in the [definitions docs](docs/definitions.md).
+
+## How to add maddy to your cmake project
+
+You can use [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html)
+which was introduced in CMake 3.11.
+
+This way you can add
+
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(
+  maddy
+  URL https://github.com/progsource/maddy/.../maddy-src.zip
+)
+FetchContent_MakeAvailable(maddy)
+
+add_executable(my_exe)
+target_link_libraries(my_exe PUBLIC maddy)
+```
+
+to your CMake file to make it work. Check the
+[release](https://github.com/progsource/maddy/releases) for the full
+zip-file-url.
+
+The zip only contains a `CMakeLists.txt`, the `include` folder and the `LICENSE`
+file.
 
 ## How to use
 
@@ -45,14 +72,15 @@ std::stringstream markdownInput("");
 std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
 // config->isEmphasizedParserEnabled = false; // default true - this flag is deprecated
 // config->isHTMLWrappedInParagraph = false; // default true - this flag is deprecated
-config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER;
-config->enabledParsers |= maddy::types::HTML_PARSER;
+config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER; // equivalent to !isEmphasizedParserEnabled
+config->enabledParsers |= maddy::types::HTML_PARSER; // equivalent to !isHTMLWrappedInParagraph
 
 std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
 std::string htmlOutput = parser->Parse(markdownInput);
 ```
 
-You can find all parser flags in [`include/maddy/parserconfig.h`](include/maddy/parserconfig.h).
+You can find all parser flags in
+[`include/maddy/parserconfig.h`](include/maddy/parserconfig.h).
 
 ## How to run the tests
 
@@ -77,7 +105,6 @@ make test # or run the executable in ../build/MaddyTests
 There are different possibilities:
 
 * [Create a GitHub issue](https://github.com/progsource/maddy/issues/new)
-* Create a pull request with an own branch (don't forget to put yourself in the
-  AUTHORS file)
+* Create a pull request with an own branch
 
 Please also read [CONTRIBUTING.md](CONTRIBUTING.md).

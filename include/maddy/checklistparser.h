@@ -54,7 +54,7 @@ public:
   static bool
   IsStartingLine(const std::string& line)
   {
-    static std::regex re("^- \\[[x| ]\\] .*");
+    static std::regex re(R"(^- \[[x| ]\] .*)");
     return std::regex_match(line, re);
   }
 
@@ -92,11 +92,11 @@ protected:
     static std::regex lineRegex("^(- )");
     line = std::regex_replace(line, lineRegex, "");
 
-    static std::regex emptyBoxRegex("^\\[ \\]");
+    static std::regex emptyBoxRegex(R"(^\[ \])");
     static std::string emptyBoxReplacement = "<input type=\"checkbox\"/>";
     line = std::regex_replace(line, emptyBoxRegex, emptyBoxReplacement);
 
-    static std::regex boxRegex("^\\[x\\]");
+    static std::regex boxRegex(R"(^\[x\])");
     static std::string boxReplacement = "<input type=\"checkbox\" checked=\"checked\"/>";
     line = std::regex_replace(line, boxRegex, boxReplacement);
 
