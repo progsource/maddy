@@ -41,7 +41,7 @@ public:
   void
   Parse(std::string& line) override
   {
-    static std::regex re("\\[([^\\]]*)\\]\\(([^\\]]*)\\)");
+    static std::regex re(R"(\[([^\]]*)\]\(([^\]]*)\))");
     static std::string replacement = "<a href=\"$2\">$1</a>";
 
     line = std::regex_replace(line, re, replacement);

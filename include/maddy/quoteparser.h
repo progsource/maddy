@@ -54,7 +54,7 @@ public:
   static bool
   IsStartingLine(const std::string& line)
   {
-    static std::regex re("^\\>.*");
+    static std::regex re(R"(^\>.*)");
     return std::regex_match(line, re);
   }
 
@@ -144,9 +144,9 @@ protected:
   void
   parseBlock(std::string& line) override
   {
-    static std::regex lineRegexWithSpace("^\\> ");
+    static std::regex lineRegexWithSpace(R"(^\> )");
     line = std::regex_replace(line, lineRegexWithSpace, "");
-    static std::regex lineRegexWithoutSpace("^\\>");
+    static std::regex lineRegexWithoutSpace(R"(^\>)");
     line = std::regex_replace(line, lineRegexWithoutSpace, "");
 
     if (!line.empty())

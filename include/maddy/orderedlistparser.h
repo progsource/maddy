@@ -89,9 +89,9 @@ protected:
     bool isStartOfNewListItem = this->isStartOfNewListItem(line);
     uint32_t indentation = getIndentationWidth(line);
 
-    static std::regex orderedlineRegex("^[1-9]+[0-9]*\\. ");
+    static std::regex orderedlineRegex(R"(^[1-9]+[0-9]*\. )");
     line = std::regex_replace(line, orderedlineRegex, "");
-    static std::regex unorderedlineRegex("^\\* ");
+    static std::regex unorderedlineRegex(R"(^\* )");
     line = std::regex_replace(line, unorderedlineRegex, "");
 
     if (!this->isStarted)
@@ -132,7 +132,7 @@ private:
   bool
   isStartOfNewListItem(const std::string& line) const
   {
-    static std::regex re("^(?:[1-9]+[0-9]*\\. |\\* ).*");
+    static std::regex re(R"(^(?:[1-9]+[0-9]*\. |\* ).*)");
     return std::regex_match(line, re);
   }
 }; // class OrderedListParser

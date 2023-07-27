@@ -78,7 +78,7 @@ public:
   static bool
   IsStartingLine(const std::string& line)
   {
-    static std::regex re("^(?:\\$){2}(.*)$");
+    static std::regex re(R"(^(?:\$){2}(.*)$)");
     return std::regex_match(line, re);
   }
 
