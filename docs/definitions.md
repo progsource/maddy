@@ -222,6 +222,18 @@ some code
 </code></pre>
 ```
 
+    ```cpp
+    int a = 42;
+    ```
+
+results in
+
+```html
+<pre class="cpp"><code>
+int a = 42;
+</code></pre>
+```
+
 ## Inline code
 
     some text `some inline code` some other text
@@ -364,3 +376,29 @@ becomes
 </table>
 ```
 table header and footer are optional
+
+## LaTeX(MathJax) block support
+
+To turn on the LaTeX support - which basically is only a
+[MathJax](https://www.mathjax.org/) support and makes sure, that formulas aren't
+internally checked for other parsers - it has to be enabled in config:
+
+```cpp
+std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
+config->enabledParsers |= maddy::types::LATEX_BLOCK_PARSER;
+
+std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
+std::string htmlOutput = parser->Parse(markdownInput);
+```
+
+After this you can do the following in Markdown:
+
+```
+$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$
+```
+
+Which results in
+
+```html
+$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$\n
+```
