@@ -49,8 +49,9 @@ body:
       required: true
   - type: textarea
     id: example
-    label: Minimal Mardown example
-    description: To be able to reproduce your issue, please give some example Markdown which creates problems.
+    attributes:
+      label: Minimal Mardown example
+      description: To be able to reproduce your issue, please give some example Markdown which creates problems.
     validations:
       required: true
   - type: textarea
