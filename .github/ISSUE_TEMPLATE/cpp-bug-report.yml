@@ -49,8 +49,9 @@ body:
       required: true
   - type: textarea
     id: example
-    label: Minimal C++ example
-    description: To be able to reproduce your issue, please give some example C++ code which creates problems.
+    attributes:
+      label: Minimal C++ example
+      description: To be able to reproduce your issue, please give some example C++ code which creates problems.
     validations:
       required: true
   - type: textarea
