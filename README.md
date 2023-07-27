@@ -21,12 +21,39 @@ It is tested to work on:
 
 ## Why maddy?
 
-When I was needing a Markdown parser in C++ I couldn't find any, that was
+When I looking for a Markdown parser in C++, I couldn't find any, that was
 fitting my needs. So I simply wrote my own one.
 
 ## Markdown syntax
 
 The supported syntax can be found in the [definitions docs](docs/definitions.md).
+
+## How to add maddy to your cmake project
+
+You can use [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html)
+which was introduced in CMake 3.11.
+
+This way you can add
+
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(
+  maddy
+  URL https://github.com/progsource/maddy/.../maddy-src.zip
+)
+FetchContent_MakeAvailable(maddy)
+
+add_executable(my_exe)
+target_link_libraries(my_exe PUBLIC maddy)
+```
+
+to your CMake file to make it work. Check the
+[release](https://github.com/progsource/maddy/releases) for the full
+zip-file-url.
+
+The zip only contains a `CMakeLists.txt`, the `include` folder and the `LICENSE`
+file.
 
 ## How to use
 
@@ -52,7 +79,8 @@ std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
 std::string htmlOutput = parser->Parse(markdownInput);
 ```
 
-You can find all parser flags in [`include/maddy/parserconfig.h`](include/maddy/parserconfig.h).
+You can find all parser flags in
+[`include/maddy/parserconfig.h`](include/maddy/parserconfig.h).
 
 ## How to run the tests
 

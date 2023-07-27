@@ -26,6 +26,7 @@ maddy uses [semver versioning](https://semver.org/).
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) class attribute to code blocks if there is text after the three backticks like ` ```cpp`
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) optional support for latex blocks - it's off by default
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) version info to the parser class
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) GitHub workflow for release, so that one can include maddy easier via cmake's `FetchContent`
 * ?
 
 ## version 1.1.2 2020-10-04
