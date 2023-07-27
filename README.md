@@ -21,7 +21,7 @@ It is tested to work on:
 
 ## Why maddy?
 
-When I looking for a Markdown parser in C++, I couldn't find any, that was
+When I was looking for a Markdown parser in C++, I couldn't find any, that was
 fitting my needs. So I simply wrote my own one.
 
 ## Markdown syntax

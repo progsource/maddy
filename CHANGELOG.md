@@ -14,6 +14,10 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
+* ?
+
+## version 1.2.0 2023-07-27
+
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Added Changelog
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Added contribution guideline
 * ![**CHANGED**](https://img.shields.io/badge/-CHANGED-%23e90) updated cmake minimum required version to 3.25
@@ -27,7 +31,6 @@ maddy uses [semver versioning](https://semver.org/).
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) optional support for latex blocks - it's off by default
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) version info to the parser class
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) GitHub workflow for release, so that one can include maddy easier via cmake's `FetchContent`
-* ?
 
 ## version 1.1.2 2020-10-04
 
