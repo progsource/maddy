@@ -1,7 +1,7 @@
 # maddy
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-brightgreen.svg)](https://semver.org/)
+[![Version: 1.2.0](https://img.shields.io/badge/Version-1.1.2-brightgreen.svg)](https://semver.org/)
 
 maddy is a C++ Markdown to HTML **header-only** parser library.
 
@@ -45,8 +45,8 @@ std::stringstream markdownInput("");
 std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
 // config->isEmphasizedParserEnabled = false; // default true - this flag is deprecated
 // config->isHTMLWrappedInParagraph = false; // default true - this flag is deprecated
-config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER;
-config->enabledParsers |= maddy::types::HTML_PARSER;
+config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER; // equivalent to !isEmphasizedParserEnabled
+config->enabledParsers |= maddy::types::HTML_PARSER; // equivalent to !isHTMLWrappedInParagraph
 
 std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
 std::string htmlOutput = parser->Parse(markdownInput);
@@ -77,7 +77,6 @@ make test # or run the executable in ../build/MaddyTests
 There are different possibilities:
 
 * [Create a GitHub issue](https://github.com/progsource/maddy/issues/new)
-* Create a pull request with an own branch (don't forget to put yourself in the
-  AUTHORS file)
+* Create a pull request with an own branch
 
 Please also read [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -52,6 +52,14 @@ class Parser
 {
 public:
   /**
+   * Version info
+   *
+   * Check https://github.com/progsource/maddy/blob/master/CHANGELOG.md
+   * for the changelog.
+  */
+  static const std::string VERSION() { static const std::string v = "1.2.0"; return v; }
+
+  /**
    * ctor
    *
    * Initializes all `LineParser`
