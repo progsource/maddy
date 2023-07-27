@@ -19,6 +19,7 @@ jobs:
 
       - name: create zip
         run: |
+          mkdir build
           mkdir tmp
           cd tmp
           cmake -DMADDY_CREATE_PACKAGE=ON ..
