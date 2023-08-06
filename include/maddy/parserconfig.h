@@ -58,11 +58,15 @@ struct ParserConfig
 {
   /**
    * @deprecated will be removed in 1.4.0 latest
+   *
+   * this flag = false == `enabledParsers &= ~maddy::types::EMPHASIZED_PARSER`
   */
   bool isEmphasizedParserEnabled;
 
   /**
    * @deprecated will be removed in 1.4.0 latest
+   *
+   * this flag = false == `enabledParsers |= maddy::types::HTML_PARSER`
   */
   bool isHTMLWrappedInParagraph;
 

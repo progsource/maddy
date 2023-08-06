@@ -14,7 +14,11 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
-* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Parser.h version() method clashing with VERSION defines at global scope 
+* ?
+
+## version 1.2.1 2023-08-06
+
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Parser.h version() method clashing with VERSION defines at global scope
 
 ## version 1.2.0 2023-07-27
 
