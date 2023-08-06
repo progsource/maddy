@@ -57,7 +57,7 @@ public:
    * Check https://github.com/progsource/maddy/blob/master/CHANGELOG.md
    * for the changelog.
   */
-  static const std::string version() { static const std::string v = "1.2.0"; return v; }
+  static const std::string& version() { static const std::string v = "1.2.1"; return v; }
 
   /**
    * ctor
