@@ -70,11 +70,22 @@ struct ParserConfig
   */
   bool isHTMLWrappedInParagraph;
 
+  /**
+   * en-/disable headline inline-parsing
+   *
+   * default: enabled
+  */
+  bool isHeadlineInlineParsingEnabled;
+
+  /**
+   * enabled parsers bitfield
+  */
   uint32_t enabledParsers;
 
   ParserConfig()
     : isEmphasizedParserEnabled(true)
     , isHTMLWrappedInParagraph(true)
+    , isHeadlineInlineParsingEnabled(true)
     , enabledParsers(maddy::types::DEFAULT)
   {}
 }; // class ParserConfig
