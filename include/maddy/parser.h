@@ -57,7 +57,7 @@ public:
    * Check https://github.com/progsource/maddy/blob/master/CHANGELOG.md
    * for the changelog.
   */
-  static const std::string& version() { static const std::string v = "1.2.1"; return v; }
+  static const std::string& version() { static const std::string v = "1.3.0"; return v; }
 
   /**
    * ctor
@@ -287,10 +287,22 @@ private:
       maddy::HeadlineParser::IsStartingLine(line)
     )
     {
-      parser = std::make_shared<maddy::HeadlineParser>(
-        nullptr,
-        nullptr
-      );
+      if (!this->config || this->config->isHeadlineInlineParsingEnabled)
+      {
+        parser = std::make_shared<maddy::HeadlineParser>(
+          [this](std::string& line){ this->runLineParser(line); },
+          nullptr,
+          true
+        );
+      }
+      else
+      {
+        parser = std::make_shared<maddy::HeadlineParser>(
+          nullptr,
+          nullptr,
+          false
+        );
+      }
     }
     else if (
       (
