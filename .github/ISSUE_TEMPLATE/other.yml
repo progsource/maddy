@@ -1,6 +1,5 @@
 name: Other
 description: Anything that doesn't fit into one of the other issue categories
-title: ""
 body:
   - type: textarea
     id: whats-up
