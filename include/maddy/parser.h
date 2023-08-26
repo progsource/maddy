@@ -287,10 +287,22 @@ private:
       maddy::HeadlineParser::IsStartingLine(line)
     )
     {
-      parser = std::make_shared<maddy::HeadlineParser>(
-        nullptr,
-        nullptr
-      );
+      if (!this->config || this->config->isHeadlineInlineParsingEnabled)
+      {
+        parser = std::make_shared<maddy::HeadlineParser>(
+          [this](std::string& line){ this->runLineParser(line); },
+          nullptr,
+          true
+        );
+      }
+      else
+      {
+        parser = std::make_shared<maddy::HeadlineParser>(
+          nullptr,
+          nullptr,
+          false
+        );
+      }
     }
     else if (
       (

@@ -64,3 +64,34 @@ TEST(MADDY_PARSER, ItShouldParseWithSmallConfig)
 
   ASSERT_EQ(testHtml3, output);
 }
+
+TEST(MADDY_PARSER, ItShouldParseInlineCodeInHeadlines)
+{
+  const std::string headlineTest = R"(
+# Some **test** markdown
+)";
+  const std::string expectedHTML = "<h1>Some <strong>test</strong> markdown</h1>";
+  std::stringstream markdown(headlineTest);
+
+  auto parser = std::make_shared<maddy::Parser>();
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(expectedHTML, output);
+}
+
+TEST(MADDY_PARSER, ItShouldNotParseInlineCodeInHeadlineIfDisabled)
+{
+  const std::string headlineTest = R"(
+# Some **test** markdown
+)";
+  const std::string expectedHTML = "<h1>Some **test** markdown</h1>";
+  std::stringstream markdown(headlineTest);
+  auto config = std::make_shared<maddy::ParserConfig>();
+  config->isHeadlineInlineParsingEnabled = false;
+  auto parser = std::make_shared<maddy::Parser>(config);
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(expectedHTML, output);
+}
