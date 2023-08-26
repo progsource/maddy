@@ -16,6 +16,10 @@ maddy uses [semver versioning](https://semver.org/).
 
 * ?
 
+## version 1.3.0 2023-08-26
+
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Headlines can have inline parsing now. It is on by default, but can be disabled by config.
+
 ## version 1.2.1 2023-08-06
 
 * ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Parser.h version() method clashing with VERSION defines at global scope
