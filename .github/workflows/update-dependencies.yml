@@ -1,0 +1,50 @@
+name: Update dependency versions
+
+on:
+  schedule:
+    # This cron expression runs the job at 00:00 UTC on the first day of every month
+    - cron: '0 0 1 * *'
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  update-fetch-content:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Pipenv
+      run: pip install pipenv
+
+    - name: Install dependencies
+      run: |
+        cd tools
+        pipenv install
+
+    - name: Run update scripts
+      run: |
+        cd tools
+        pipenv run python update_dependencies.py .. tmp tools build docs .github
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        git config --local user.name "github-actions"
+        git config --local user.email "github-actions@github.com"
+        git add .
+        git diff --cached --exit-code || echo "changed" >> $GITHUB_ENV
+
+    - name: Create Pull Request
+      if: env.changed == 'changed'
+      run: |
+        git commit -m "Update dependency versions"
+        git push origin HEAD:update-dependency-versions
+        gh pr create --base main --head update-dependency-versions --title "Update dependency versions" --body "This pull request updates the dependency versions in files."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
