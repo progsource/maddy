@@ -30,11 +30,13 @@ public:
    *
    * @method
    * @param {std::function<void(std::string&)>} parseLineCallback
-   * @param {std::function<std::shared_ptr<BlockParser>(const std::string& line)>} getBlockParserForLineCallback
+   * @param {std::function<std::shared_ptr<BlockParser>(const std::string&
+   * line)>} getBlockParserForLineCallback
    */
-   HtmlParser(
+  HtmlParser(
     std::function<void(std::string&)> parseLineCallback,
-    std::function<std::shared_ptr<BlockParser>(const std::string& line)> getBlockParserForLineCallback
+    std::function<std::shared_ptr<BlockParser>(const std::string& line)>
+      getBlockParserForLineCallback
   )
     : BlockParser(parseLineCallback, getBlockParserForLineCallback)
     , isStarted(false)
@@ -52,11 +54,7 @@ public:
    * @param {const std::string&} line
    * @return {bool}
    */
-  static bool
-  IsStartingLine(const std::string& line)
-  {
-    return line[0] == '<';
-  }
+  static bool IsStartingLine(const std::string& line) { return line[0] == '<'; }
 
   /**
    * IsFinished
@@ -66,27 +64,14 @@ public:
    * @method
    * @return {bool}
    */
-  bool
-  IsFinished() const override
-  {
-    return this->isFinished;
-  }
+  bool IsFinished() const override { return this->isFinished; }
 
 protected:
-  bool
-  isInlineBlockAllowed() const override
-  {
-    return false;
-  }
+  bool isInlineBlockAllowed() const override { return false; }
 
-  bool
-  isLineParserAllowed() const override
-  {
-    return false;
-  }
+  bool isLineParserAllowed() const override { return false; }
 
-  void
-  parseBlock(std::string& line) override
+  void parseBlock(std::string& line) override
   {
     if (!this->isStarted)
     {

@@ -1,0 +1,25 @@
+name: run-checks
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  run-clang-format:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Run format script with dry_run
+        run: |
+          clang-format --version
+          python tools/format.py dry_run

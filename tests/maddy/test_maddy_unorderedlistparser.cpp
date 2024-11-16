@@ -15,10 +15,10 @@ class MADDY_UNORDEREDLISTPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::UnorderedListParser> ulParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    std::function<std::shared_ptr<maddy::BlockParser>(const std::string& line)> getBlockParserForLineCallback = [](const std::string& line)
+    std::function<std::shared_ptr<maddy::BlockParser>(const std::string& line)>
+      getBlockParserForLineCallback = [](const std::string& line)
     {
       if (maddy::UnorderedListParser::IsStartingLine(line))
       {
@@ -32,15 +32,17 @@ protected:
     };
 
     this->ulParser = std::make_shared<maddy::UnorderedListParser>(
-      nullptr,
-      getBlockParserForLineCallback
+      nullptr, getBlockParserForLineCallback
     );
   }
 };
 
 // -----------------------------------------------------------------------------
 
-TEST_F(MADDY_UNORDEREDLISTPARSER, IsStartingLineReturnsTrueWhenFacedWithBeginningOfList)
+TEST_F(
+  MADDY_UNORDEREDLISTPARSER,
+  IsStartingLineReturnsTrueWhenFacedWithBeginningOfList
+)
 {
   ASSERT_TRUE(maddy::UnorderedListParser::IsStartingLine("* a"));
 }
@@ -53,16 +55,11 @@ TEST_F(MADDY_UNORDEREDLISTPARSER, IsFinishedAlwaysReturnsFalseInTheBeginning)
 TEST_F(MADDY_UNORDEREDLISTPARSER, ItReplacesMarkdownWithAnHtmlUnorderedList)
 {
   std::vector<std::string> markdown = {
-    "* a"
-    , "* b"
-	, "- c"
-	, "- d"
-	, "+ e"
-	, "+ f"
-	, "* g"
-    , ""
+    "* a", "* b", "- c", "- d", "+ e", "+ f", "* g", ""
   };
-  std::string expected = "<ul><li>a</li><li>b</li><li>c</li><li>d</li><li>e</li><li>f</li><li>g</li></ul>";
+  std::string expected =
+    "<ul><li>a</li><li>b</li><li>c</li><li>d</li><li>e</li><li>f</li><li>g</"
+    "li></ul>";
 
   for (std::string md : markdown)
   {
@@ -80,17 +77,11 @@ TEST_F(MADDY_UNORDEREDLISTPARSER, ItReplacesMarkdownWithAnHtmlUnorderedList)
 TEST_F(MADDY_UNORDEREDLISTPARSER, ItReplacesMarkdownWithAnHierachicalHtmlList)
 {
   std::vector<std::string> markdown = {
-    "* a"
-    , "  * d"
-    , "  * e"
-    , "* b"
-    , "  * c"
-	, "  + x"
-	, "  + y"
-	, "  - z"
-    , ""
+    "* a", "  * d", "  * e", "* b", "  * c", "  + x", "  + y", "  - z", ""
   };
-  std::string expected = "<ul><li>a<ul><li>d</li><li>e</li></ul></li><li>b<ul><li>c</li><li>x</li><li>y</li><li>z</li></ul></li></ul>";
+  std::string expected =
+    "<ul><li>a<ul><li>d</li><li>e</li></ul></li><li>b<ul><li>c</li><li>x</"
+    "li><li>y</li><li>z</li></ul></li></ul>";
 
   for (std::string md : markdown)
   {

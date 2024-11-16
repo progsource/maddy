@@ -24,7 +24,8 @@ TEST(MADDY_EMPHASIZEDPARSER, ItReplacesMarkdownWithEmphasizedHTML)
 TEST(MADDY_EMPHASIZEDPARSER, ItDoesNotParseInsideInlineCode)
 {
   std::string text = "some text `*bla*` `/**text*/` testing _it_ out";
-  std::string expected = "some text `*bla*` `/**text*/` testing <em>it</em> out";
+  std::string expected =
+    "some text `*bla*` `/**text*/` testing <em>it</em> out";
   auto emphasizedParser = std::make_shared<maddy::EmphasizedParser>();
 
   emphasizedParser->Parse(text);

@@ -6,8 +6,8 @@
 
 // -----------------------------------------------------------------------------
 
-#include <string>
 #include <regex>
+#include <string>
 
 #include "maddy/lineparser.h"
 
@@ -38,10 +38,11 @@ public:
    * @param {std::string&} line The line to interpret
    * @return {void}
    */
-  void
-  Parse(std::string& line) override
+  void Parse(std::string& line) override
   {
-    static std::regex re(R"((?!.*`.*|.*<code>.*)_(?!.*`.*|.*<\/code>.*)([^_]*)_(?!.*`.*|.*<\/code>.*))");
+    static std::regex re(
+      R"((?!.*`.*|.*<code>.*)_(?!.*`.*|.*<\/code>.*)([^_]*)_(?!.*`.*|.*<\/code>.*))"
+    );
     static std::string replacement = "<em>$1</em>";
 
     line = std::regex_replace(line, re, replacement);

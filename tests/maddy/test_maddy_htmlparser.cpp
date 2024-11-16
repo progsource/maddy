@@ -15,13 +15,9 @@ class MADDY_HTMLPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::HtmlParser> pParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    this->pParser = std::make_shared<maddy::HtmlParser>(
-      nullptr,
-      nullptr
-    );
+    this->pParser = std::make_shared<maddy::HtmlParser>(nullptr, nullptr);
   }
 };
 
@@ -35,11 +31,7 @@ TEST_F(MADDY_HTMLPARSER, IsFinishedReturnsFalseInTheBeginning)
 TEST_F(MADDY_HTMLPARSER, IsStartingLineReturnsFalseWhenFacedWithNoSmallerThan)
 {
   const std::vector<std::string> markdown = {
-    "> quote"
-    , "some text"
-    , "* list"
-    , "1. numbered list"
-    , "|table>"
+    "> quote", "some text", "* list", "1. numbered list", "|table>"
   };
 
   for (size_t i = 0; i < markdown.size(); ++i)
@@ -57,17 +49,18 @@ TEST_F(MADDY_HTMLPARSER, IsStartingLineReturnsTrueWhenFacedWithSmallerThan)
 
 TEST_F(MADDY_HTMLPARSER, ItReplacesNoHtml)
 {
-  const std::vector<std::string> markdown {
-    "some text in a paragraph"
-    , ""
-    , "<div> some HTML</div>"
-    , ""
-    , "<div>more"
-    , "HTML"
-    , "</div>"
-    , ""
+  const std::vector<std::string> markdown{
+    "some text in a paragraph",
+    "",
+    "<div> some HTML</div>",
+    "",
+    "<div>more",
+    "HTML",
+    "</div>",
+    ""
   };
-  const std::string expected = "some text in a paragraph <div> some HTML</div><div>more HTML </div>";
+  const std::string expected =
+    "some text in a paragraph <div> some HTML</div><div>more HTML </div>";
 
   for (std::string md : markdown)
   {

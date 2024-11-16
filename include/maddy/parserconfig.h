@@ -14,6 +14,7 @@ namespace maddy {
 
 namespace types {
 
+// clang-format off
 /**
  * PARSER_TYPE
  *
@@ -46,6 +47,7 @@ enum PARSER_TYPE : uint32_t
   DEFAULT                  = 0b0111111111110111111,
   ALL                      = 0b1111111111111111111,
 };
+// clang-format on
 
 } // namespace types
 
@@ -60,26 +62,26 @@ struct ParserConfig
    * @deprecated will be removed in 1.4.0 latest
    *
    * this flag = false == `enabledParsers &= ~maddy::types::EMPHASIZED_PARSER`
-  */
+   */
   bool isEmphasizedParserEnabled;
 
   /**
    * @deprecated will be removed in 1.4.0 latest
    *
    * this flag = false == `enabledParsers |= maddy::types::HTML_PARSER`
-  */
+   */
   bool isHTMLWrappedInParagraph;
 
   /**
    * en-/disable headline inline-parsing
    *
    * default: enabled
-  */
+   */
   bool isHeadlineInlineParsingEnabled;
 
   /**
    * enabled parsers bitfield
-  */
+   */
   uint32_t enabledParsers;
 
   ParserConfig()

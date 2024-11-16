@@ -6,7 +6,8 @@
 
 #include <string>
 
-const std::string testMarkdown = "# This is a test\n\
+const std::string testMarkdown =
+  "# This is a test\n\
 \n\
 This should result in a praragraph\n\
 it's that simple.\n\
@@ -69,6 +70,71 @@ foot a|foot b|foot c\n\
 \n\
 ";
 
-const std::string testHtml = "<h1>This is a test</h1><p>This should result in a praragraph it's that simple. </p><ul><li>an <i>unordered</i> list<ul><li>with some <strong>hierarchy</strong><ol><li>and an <em>ordered</em></li><li>list</li><li>directly</li></ol></li><li>inside</li></ul></li></ul><pre><code>\nvar c = 'blub';\n</code></pre><blockquote><p>A Quote  </p><p>With some <s>text</s>  blocks inside  </p><ul><li>even a list </li><li>should be </li><li>possible </li></ul></blockquote><p>And well <code>inline code</code> should also work. </p><h2>Another Headline</h2><p>And not to forget <a href=\"http://progsource.de\">link to progsource</a> should work. And well - let's see how an image would be shown: </p><p><img src=\"http://progsource.de/img/progsource.png\" alt=\"an image\"/> </p><hr/><p><a name=\"to top\"></a> </p><h3>and more headlines</h3><ul class=\"checklist\"><li><label><input type=\"checkbox\"/> how</label></li><li><label><input type=\"checkbox\"/> about<ul class=\"checklist\"><li><label><input type=\"checkbox\"/> a</label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> nice</label></li></ul></label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> check</label></li><li><label><input type=\"checkbox\"/> list</label></li></ul><h4>even a table</h4><table><thead><tr><th>Left header</th><th>middle header</th><th>last header</th></tr></thead><tbody><tr><td>cell 1</td><td>cell <strong>2</strong></td><td>cell 3</td></tr><tr><td>cell 4</td><td>cell 5</td><td>cell 6</td></tr></tbody><tfoot><tr><td>foot a</td><td>foot b</td><td>foot c</td></tr></tfoot></table><h5>h5</h5><h6>h6</h6>";
-const std::string testHtml2 = "<h1>This is a test</h1><p>This should result in a praragraph it's that simple. </p><ul><li>an <i>unordered</i> list<ul><li>with some <strong>hierarchy</strong><ol><li>and an _ordered_</li><li>list</li><li>directly</li></ol></li><li>inside</li></ul></li></ul><pre><code>\nvar c = 'blub';\n</code></pre><blockquote><p>A Quote  </p><p>With some <s>text</s>  blocks inside  </p><ul><li>even a list </li><li>should be </li><li>possible </li></ul></blockquote><p>And well <code>inline code</code> should also work. </p><h2>Another Headline</h2><p>And not to forget <a href=\"http://progsource.de\">link to progsource</a> should work. And well - let's see how an image would be shown: </p><p><img src=\"http://progsource.de/img/progsource.png\" alt=\"an image\"/> </p><hr/><a name=\"to top\"></a><h3>and more headlines</h3><ul class=\"checklist\"><li><label><input type=\"checkbox\"/> how</label></li><li><label><input type=\"checkbox\"/> about<ul class=\"checklist\"><li><label><input type=\"checkbox\"/> a</label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> nice</label></li></ul></label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> check</label></li><li><label><input type=\"checkbox\"/> list</label></li></ul><h4>even a table</h4><table><thead><tr><th>Left header</th><th>middle header</th><th>last header</th></tr></thead><tbody><tr><td>cell 1</td><td>cell <strong>2</strong></td><td>cell 3</td></tr><tr><td>cell 4</td><td>cell 5</td><td>cell 6</td></tr></tbody><tfoot><tr><td>foot a</td><td>foot b</td><td>foot c</td></tr></tfoot></table><h5>h5</h5><h6>h6</h6>";
-const std::string testHtml3 = "# This is a test <br/>This should result in a praragraph it's that simple. <br/>* an *unordered* list   * with some <strong>hierarchy</strong>     1. and an <em>ordered</em>     * list     * directly   * inside <br/>``` var c = 'blub'; ``` <br/>> A Quote > > With some ~~text~~  blocks inside > > * even a list > * should be > * possible > <br/>And well `inline code` should also work. <br/>## Another Headline <br/>And not to forget [link to progsource](http://progsource.de) should work. And well - let's see how an image would be shown: <br/>![an image](http://progsource.de/img/progsource.png) <br/>--- <br/><a name=\"to top\"></a> <br/>### and more headlines <br/>- [ ] how - [ ] about   - [ ] a   - [x] nice - [x] check - [ ] list <br/>#### even a table <br/>|table> Left header|middle header|last header - | - | - cell 1|cell <strong>2</strong>|cell 3 cell 4|cell 5|cell 6 - | - | - foot a|foot b|foot c |<table <br/>##### h5 ###### h6 <br/>";
+const std::string testHtml =
+  "<h1>This is a test</h1><p>This should result in a praragraph it's that "
+  "simple. </p><ul><li>an <i>unordered</i> list<ul><li>with some "
+  "<strong>hierarchy</strong><ol><li>and an "
+  "<em>ordered</em></li><li>list</li><li>directly</li></ol></li><li>inside</"
+  "li></ul></li></ul><pre><code>\nvar c = "
+  "'blub';\n</code></pre><blockquote><p>A Quote  </p><p>With some <s>text</s>  "
+  "blocks inside  </p><ul><li>even a list </li><li>should be </li><li>possible "
+  "</li></ul></blockquote><p>And well <code>inline code</code> should also "
+  "work. </p><h2>Another Headline</h2><p>And not to forget <a "
+  "href=\"http://progsource.de\">link to progsource</a> should work. And well "
+  "- let's see how an image would be shown: </p><p><img "
+  "src=\"http://progsource.de/img/progsource.png\" alt=\"an image\"/> "
+  "</p><hr/><p><a name=\"to top\"></a> </p><h3>and more headlines</h3><ul "
+  "class=\"checklist\"><li><label><input type=\"checkbox\"/> "
+  "how</label></li><li><label><input type=\"checkbox\"/> about<ul "
+  "class=\"checklist\"><li><label><input type=\"checkbox\"/> "
+  "a</label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> "
+  "nice</label></li></ul></label></li><li><label><input type=\"checkbox\" "
+  "checked=\"checked\"/> check</label></li><li><label><input "
+  "type=\"checkbox\"/> list</label></li></ul><h4>even a "
+  "table</h4><table><thead><tr><th>Left header</th><th>middle "
+  "header</th><th>last header</th></tr></thead><tbody><tr><td>cell "
+  "1</td><td>cell <strong>2</strong></td><td>cell 3</td></tr><tr><td>cell "
+  "4</td><td>cell 5</td><td>cell 6</td></tr></tbody><tfoot><tr><td>foot "
+  "a</td><td>foot b</td><td>foot "
+  "c</td></tr></tfoot></table><h5>h5</h5><h6>h6</h6>";
+const std::string testHtml2 =
+  "<h1>This is a test</h1><p>This should result in a praragraph it's that "
+  "simple. </p><ul><li>an <i>unordered</i> list<ul><li>with some "
+  "<strong>hierarchy</strong><ol><li>and an "
+  "_ordered_</li><li>list</li><li>directly</li></ol></li><li>inside</li></ul></"
+  "li></ul><pre><code>\nvar c = 'blub';\n</code></pre><blockquote><p>A Quote  "
+  "</p><p>With some <s>text</s>  blocks inside  </p><ul><li>even a list "
+  "</li><li>should be </li><li>possible </li></ul></blockquote><p>And well "
+  "<code>inline code</code> should also work. </p><h2>Another "
+  "Headline</h2><p>And not to forget <a href=\"http://progsource.de\">link to "
+  "progsource</a> should work. And well - let's see how an image would be "
+  "shown: </p><p><img src=\"http://progsource.de/img/progsource.png\" alt=\"an "
+  "image\"/> </p><hr/><a name=\"to top\"></a><h3>and more headlines</h3><ul "
+  "class=\"checklist\"><li><label><input type=\"checkbox\"/> "
+  "how</label></li><li><label><input type=\"checkbox\"/> about<ul "
+  "class=\"checklist\"><li><label><input type=\"checkbox\"/> "
+  "a</label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> "
+  "nice</label></li></ul></label></li><li><label><input type=\"checkbox\" "
+  "checked=\"checked\"/> check</label></li><li><label><input "
+  "type=\"checkbox\"/> list</label></li></ul><h4>even a "
+  "table</h4><table><thead><tr><th>Left header</th><th>middle "
+  "header</th><th>last header</th></tr></thead><tbody><tr><td>cell "
+  "1</td><td>cell <strong>2</strong></td><td>cell 3</td></tr><tr><td>cell "
+  "4</td><td>cell 5</td><td>cell 6</td></tr></tbody><tfoot><tr><td>foot "
+  "a</td><td>foot b</td><td>foot "
+  "c</td></tr></tfoot></table><h5>h5</h5><h6>h6</h6>";
+const std::string testHtml3 =
+  "# This is a test <br/>This should result in a praragraph it's that simple. "
+  "<br/>* an *unordered* list   * with some <strong>hierarchy</strong>     1. "
+  "and an <em>ordered</em>     * list     * directly   * inside <br/>``` var c "
+  "= 'blub'; ``` <br/>> A Quote > > With some ~~text~~  blocks inside > > * "
+  "even a list > * should be > * possible > <br/>And well `inline code` should "
+  "also work. <br/>## Another Headline <br/>And not to forget [link to "
+  "progsource](http://progsource.de) should work. And well - let's see how an "
+  "image would be shown: <br/>![an "
+  "image](http://progsource.de/img/progsource.png) <br/>--- <br/><a name=\"to "
+  "top\"></a> <br/>### and more headlines <br/>- [ ] how - [ ] about   - [ ] a "
+  "  - [x] nice - [x] check - [ ] list <br/>#### even a table <br/>|table> "
+  "Left header|middle header|last header - | - | - cell 1|cell "
+  "<strong>2</strong>|cell 3 cell 4|cell 5|cell 6 - | - | - foot a|foot b|foot "
+  "c |<table <br/>##### h5 ###### h6 <br/>";

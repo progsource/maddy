@@ -13,7 +13,8 @@
 TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithALink)
 {
   std::string text = "Some text [Link Title](http://example.com)";
-  std::string expected = "Some text <a href=\"http://example.com\">Link Title</a>";
+  std::string expected =
+    "Some text <a href=\"http://example.com\">Link Title</a>";
   auto linkParser = std::make_shared<maddy::LinkParser>();
 
   linkParser->Parse(text);
@@ -23,8 +24,12 @@ TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithALink)
 
 TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithLinks)
 {
-  std::string text = "Some text [Link Title](http://example.com) bla [Link Title](http://example.com)";
-  std::string expected = "Some text <a href=\"http://example.com\">Link Title</a> bla <a href=\"http://example.com\">Link Title</a>";
+  std::string text =
+    "Some text [Link Title](http://example.com) bla [Link "
+    "Title](http://example.com)";
+  std::string expected =
+    "Some text <a href=\"http://example.com\">Link Title</a> bla <a "
+    "href=\"http://example.com\">Link Title</a>";
   auto linkParser = std::make_shared<maddy::LinkParser>();
 
   linkParser->Parse(text);
@@ -34,7 +39,8 @@ TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithLinks)
 
 // -----------------------------------------------------------------------------
 
-class DISABLED_MADDY_LINKPARSER : public ::testing::Test {  };
+class DISABLED_MADDY_LINKPARSER : public ::testing::Test
+{};
 
 // This test is disabled for now, so make sure, to first run the ImageParser
 // before using the LinkParser

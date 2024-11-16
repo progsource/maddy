@@ -15,13 +15,9 @@ class MADDY_CODEBLOCKPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::CodeBlockParser> cbParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    this->cbParser = std::make_shared<maddy::CodeBlockParser>(
-      nullptr,
-      nullptr
-    );
+    this->cbParser = std::make_shared<maddy::CodeBlockParser>(nullptr, nullptr);
   }
 };
 
@@ -40,13 +36,11 @@ TEST_F(MADDY_CODEBLOCKPARSER, IsFinishedReturnsFalseInTheBeginning)
 TEST_F(MADDY_CODEBLOCKPARSER, ItReplacesMarkdownWithAnHtmlCodeBlock)
 {
   std::vector<std::string> markdown = {
-    "```"
-    , "some code"
-    , "some other code"
-    , "```"
+    "```", "some code", "some other code", "```"
   };
 
-  std::string expected = "<pre><code>\nsome code\nsome other code\n</code></pre>";
+  std::string expected =
+    "<pre><code>\nsome code\nsome other code\n</code></pre>";
 
   for (std::string md : markdown)
   {
@@ -63,13 +57,11 @@ TEST_F(MADDY_CODEBLOCKPARSER, ItReplacesMarkdownWithAnHtmlCodeBlock)
 TEST_F(MADDY_CODEBLOCKPARSER, ItShouldUseAnythingBehindFirstBackticksAsClass)
 {
   std::vector<std::string> markdown = {
-    "```cpp"
-    , "some code"
-    , "some other code"
-    , "```"
+    "```cpp", "some code", "some other code", "```"
   };
 
-  std::string expected = "<pre class=\"cpp\"><code>\nsome code\nsome other code\n</code></pre>";
+  std::string expected =
+    "<pre class=\"cpp\"><code>\nsome code\nsome other code\n</code></pre>";
 
   for (std::string md : markdown)
   {

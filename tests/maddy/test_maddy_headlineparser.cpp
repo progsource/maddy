@@ -15,19 +15,17 @@ class MADDY_HEADLINEPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::HeadlineParser> hlParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    this->hlParser = std::make_shared<maddy::HeadlineParser>(
-      nullptr,
-      nullptr
-    );
+    this->hlParser = std::make_shared<maddy::HeadlineParser>(nullptr, nullptr);
   }
 };
 
 // -----------------------------------------------------------------------------
 
-TEST_F(MADDY_HEADLINEPARSER, IsStartingLineReturnsTrueWhenFacedWithOneToSixHashes)
+TEST_F(
+  MADDY_HEADLINEPARSER, IsStartingLineReturnsTrueWhenFacedWithOneToSixHashes
+)
 {
   ASSERT_TRUE(maddy::HeadlineParser::IsStartingLine("# a"));
   ASSERT_TRUE(maddy::HeadlineParser::IsStartingLine("## a"));
@@ -45,21 +43,16 @@ TEST_F(MADDY_HEADLINEPARSER, IsFinishedAlwaysReturnsTrue)
 TEST_F(MADDY_HEADLINEPARSER, ItReplacesMarkdownWithAnHtmlHeadline)
 {
   std::vector<std::string> markdown = {
-    "# a"
-    , "## a"
-    , "### a"
-    , "#### a"
-    , "##### a"
-    , "###### a"
+    "# a", "## a", "### a", "#### a", "##### a", "###### a"
   };
 
   std::vector<std::string> expected = {
-    "<h1>a</h1>"
-    , "<h2>a</h2>"
-    , "<h3>a</h3>"
-    , "<h4>a</h4>"
-    , "<h5>a</h5>"
-    , "<h6>a</h6>"
+    "<h1>a</h1>",
+    "<h2>a</h2>",
+    "<h3>a</h3>",
+    "<h4>a</h4>",
+    "<h5>a</h5>",
+    "<h6>a</h6>"
   };
 
   for (uint8_t i = 0; i < 6; ++i)

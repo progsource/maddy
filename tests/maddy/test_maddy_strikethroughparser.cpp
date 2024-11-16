@@ -23,8 +23,10 @@ TEST(MADDY_STRIKETHROUGHPARSER, ItReplacesMarkdownWithStrikeThroughHTML)
 
 TEST(MADDY_STRIKETHROUGHPARSER, ItDoesNotParseInsideInlineCode)
 {
-  std::string text = "some text `~~bla~~` ` ~~text~~ ` testing <code>~~it~~</code> out";
-  std::string expected = "some text `~~bla~~` ` ~~text~~ ` testing <code>~~it~~</code> out";
+  std::string text =
+    "some text `~~bla~~` ` ~~text~~ ` testing <code>~~it~~</code> out";
+  std::string expected =
+    "some text `~~bla~~` ` ~~text~~ ` testing <code>~~it~~</code> out";
   auto strikeThroughParser = std::make_shared<maddy::StrikeThroughParser>();
 
   strikeThroughParser->Parse(text);
