@@ -15,6 +15,7 @@ maddy uses [semver versioning](https://semver.org/).
 ## Upcoming
 
 * ![**CHANGED**](https://img.shields.io/badge/-CHANGED-%23e90) Updated google test to v1.15.0.
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) clang-format
 
 ## version 1.3.0 2023-08-26
 

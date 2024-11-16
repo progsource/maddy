@@ -15,19 +15,18 @@ class MADDY_HORIZONTALLINEPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::HorizontalLineParser> hlParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    this->hlParser = std::make_shared<maddy::HorizontalLineParser>(
-      nullptr,
-      nullptr
-    );
+    this->hlParser =
+      std::make_shared<maddy::HorizontalLineParser>(nullptr, nullptr);
   }
 };
 
 // -----------------------------------------------------------------------------
 
-TEST_F(MADDY_HORIZONTALLINEPARSER, IsStartingLineReturnsTrueWhenFacedWithThreeDashes)
+TEST_F(
+  MADDY_HORIZONTALLINEPARSER, IsStartingLineReturnsTrueWhenFacedWithThreeDashes
+)
 {
   ASSERT_TRUE(maddy::HorizontalLineParser::IsStartingLine("---"));
 }

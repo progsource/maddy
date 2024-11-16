@@ -15,13 +15,10 @@ class MADDY_LATEXBLOCKPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::LatexBlockParser> lbParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    this->lbParser = std::make_shared<maddy::LatexBlockParser>(
-      nullptr,
-      nullptr
-    );
+    this->lbParser =
+      std::make_shared<maddy::LatexBlockParser>(nullptr, nullptr);
   }
 };
 
@@ -60,9 +57,7 @@ TEST_F(MADDY_LATEXBLOCKPARSER, ItReplacesOneLineMarkdownWithALatexBlock)
 TEST_F(MADDY_LATEXBLOCKPARSER, ItReplacesABlockMarkdownWithALatexBlock)
 {
   std::vector<std::string> markdown = {
-    "$$",
-    "x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.",
-    "$$"
+    "$$", "x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.", "$$"
   };
 
   std::string expected = "$$\nx = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.\n$$\n";
@@ -82,9 +77,7 @@ TEST_F(MADDY_LATEXBLOCKPARSER, ItReplacesABlockMarkdownWithALatexBlock)
 TEST_F(MADDY_LATEXBLOCKPARSER, ItReplacesAMultilineBlockMarkdownWithALatexBlock)
 {
   std::vector<std::string> markdown = {
-    "$$",
-    "x = {-b \\pm \\sqrt{b^2-4ac}",
-    "\\over 2a}.$$"
+    "$$", "x = {-b \\pm \\sqrt{b^2-4ac}", "\\over 2a}.$$"
   };
 
   std::string expected = "$$\nx = {-b \\pm \\sqrt{b^2-4ac}\n\\over 2a}.$$\n";

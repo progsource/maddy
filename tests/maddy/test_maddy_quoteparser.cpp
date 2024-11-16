@@ -15,19 +15,17 @@ class MADDY_QUOTEPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::QuoteParser> quoteParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    this->quoteParser = std::make_shared<maddy::QuoteParser>(
-      nullptr,
-      nullptr
-    );
+    this->quoteParser = std::make_shared<maddy::QuoteParser>(nullptr, nullptr);
   }
 };
 
 // -----------------------------------------------------------------------------
 
-TEST_F(MADDY_QUOTEPARSER, IsStartingLineReturnsTrueWhenFacedWithBeginningOfAQuote)
+TEST_F(
+  MADDY_QUOTEPARSER, IsStartingLineReturnsTrueWhenFacedWithBeginningOfAQuote
+)
 {
   ASSERT_TRUE(maddy::QuoteParser::IsStartingLine("> a"));
 }
@@ -39,13 +37,7 @@ TEST_F(MADDY_QUOTEPARSER, IsFinishedAlwaysReturnsFalseInTheBeginning)
 
 TEST_F(MADDY_QUOTEPARSER, ItReplacesMarkdownWithAnHtmlBlockQuote)
 {
-  std::vector<std::string> markdown = {
-    "> a"
-    , "> b"
-    , ">"
-    , "> c"
-    , ""
-  };
+  std::vector<std::string> markdown = {"> a", "> b", ">", "> c", ""};
   std::string expected = "<blockquote>a b c </blockquote>";
 
   for (std::string md : markdown)

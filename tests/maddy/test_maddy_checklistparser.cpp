@@ -15,10 +15,10 @@ class MADDY_CHECKLISTPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::ChecklistParser> clParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    std::function<std::shared_ptr<maddy::BlockParser>(const std::string& line)> getBlockParserForLineCallback = [](const std::string& line)
+    std::function<std::shared_ptr<maddy::BlockParser>(const std::string& line)>
+      getBlockParserForLineCallback = [](const std::string& line)
     {
       if (maddy::ChecklistParser::IsStartingLine(line))
       {
@@ -32,15 +32,16 @@ protected:
     };
 
     this->clParser = std::make_shared<maddy::ChecklistParser>(
-      nullptr,
-      getBlockParserForLineCallback
+      nullptr, getBlockParserForLineCallback
     );
   }
 };
 
 // -----------------------------------------------------------------------------
 
-TEST_F(MADDY_CHECKLISTPARSER, IsStartingLineReturnsTrueWhenFacedWithBeginningOfList)
+TEST_F(
+  MADDY_CHECKLISTPARSER, IsStartingLineReturnsTrueWhenFacedWithBeginningOfList
+)
 {
   ASSERT_TRUE(maddy::ChecklistParser::IsStartingLine("- [ ] a"));
   ASSERT_TRUE(maddy::ChecklistParser::IsStartingLine("- [x] b"));
@@ -53,12 +54,11 @@ TEST_F(MADDY_CHECKLISTPARSER, IsFinishedAlwaysReturnsFalseInTheBeginning)
 
 TEST_F(MADDY_CHECKLISTPARSER, ItReplacesMarkdownWithAnHtmlChecklist)
 {
-  std::vector<std::string> markdown = {
-    "- [ ] a"
-    , "- [x] b"
-    , ""
-  };
-  std::string expected = "<ul class=\"checklist\"><li><label><input type=\"checkbox\"/> a</label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> b</label></li></ul>";
+  std::vector<std::string> markdown = {"- [ ] a", "- [x] b", ""};
+  std::string expected =
+    "<ul class=\"checklist\"><li><label><input type=\"checkbox\"/> "
+    "a</label></li><li><label><input type=\"checkbox\" checked=\"checked\"/> "
+    "b</label></li></ul>";
 
   for (std::string md : markdown)
   {
@@ -76,14 +76,15 @@ TEST_F(MADDY_CHECKLISTPARSER, ItReplacesMarkdownWithAnHtmlChecklist)
 TEST_F(MADDY_CHECKLISTPARSER, ItReplacesMarkdownWithAnHierachicalHtmlList)
 {
   std::vector<std::string> markdown = {
-    "- [ ] a"
-    , "  - [ ] d"
-    , "  - [ ] e"
-    , "- [ ] b"
-    , "  - [x] c"
-    , ""
+    "- [ ] a", "  - [ ] d", "  - [ ] e", "- [ ] b", "  - [x] c", ""
   };
-  std::string expected = "<ul class=\"checklist\"><li><label><input type=\"checkbox\"/> a<ul class=\"checklist\"><li><label><input type=\"checkbox\"/> d</label></li><li><label><input type=\"checkbox\"/> e</label></li></ul></label></li><li><label><input type=\"checkbox\"/> b<ul class=\"checklist\"><li><label><input type=\"checkbox\" checked=\"checked\"/> c</label></li></ul></label></li></ul>";
+  std::string expected =
+    "<ul class=\"checklist\"><li><label><input type=\"checkbox\"/> a<ul "
+    "class=\"checklist\"><li><label><input type=\"checkbox\"/> "
+    "d</label></li><li><label><input type=\"checkbox\"/> "
+    "e</label></li></ul></label></li><li><label><input type=\"checkbox\"/> "
+    "b<ul class=\"checklist\"><li><label><input type=\"checkbox\" "
+    "checked=\"checked\"/> c</label></li></ul></label></li></ul>";
 
   for (std::string md : markdown)
   {

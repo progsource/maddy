@@ -31,11 +31,13 @@ public:
    *
    * @method
    * @param {std::function<void(std::string&)>} parseLineCallback
-   * @param {std::function<std::shared_ptr<BlockParser>(const std::string& line)>} getBlockParserForLineCallback
+   * @param {std::function<std::shared_ptr<BlockParser>(const std::string&
+   * line)>} getBlockParserForLineCallback
    */
-   UnorderedListParser(
+  UnorderedListParser(
     std::function<void(std::string&)> parseLineCallback,
-    std::function<std::shared_ptr<BlockParser>(const std::string& line)> getBlockParserForLineCallback
+    std::function<std::shared_ptr<BlockParser>(const std::string& line)>
+      getBlockParserForLineCallback
   )
     : BlockParser(parseLineCallback, getBlockParserForLineCallback)
     , isStarted(false)
@@ -51,8 +53,7 @@ public:
    * @param {const std::string&} line
    * @return {bool}
    */
-  static bool
-  IsStartingLine(const std::string& line)
+  static bool IsStartingLine(const std::string& line)
   {
     static std::regex re("^[+*-] .*");
     return std::regex_match(line, re);
@@ -64,27 +65,14 @@ public:
    * @method
    * @return {bool}
    */
-  bool
-  IsFinished() const override
-  {
-    return this->isFinished;
-  }
+  bool IsFinished() const override { return this->isFinished; }
 
 protected:
-  bool
-  isInlineBlockAllowed() const override
-  {
-    return true;
-  }
+  bool isInlineBlockAllowed() const override { return true; }
 
-  bool
-  isLineParserAllowed() const override
-  {
-    return true;
-  }
+  bool isLineParserAllowed() const override { return true; }
 
-  void
-  parseBlock(std::string& line) override
+  void parseBlock(std::string& line) override
   {
     bool isStartOfNewListItem = IsStartingLine(line);
     uint32_t indentation = getIndentationWidth(line);
@@ -105,12 +93,9 @@ protected:
       return;
     }
 
-    if (
-      line.empty() ||
-      line.find("</li><li>") != std::string::npos ||
-      line.find("</li></ol>") != std::string::npos ||
-      line.find("</li></ul>") != std::string::npos
-    )
+    if (line.empty() || line.find("</li><li>") != std::string::npos ||
+        line.find("</li></ol>") != std::string::npos ||
+        line.find("</li></ul>") != std::string::npos)
     {
       line = "</li></ul>" + line;
       this->isFinished = true;

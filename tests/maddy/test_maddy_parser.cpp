@@ -3,10 +3,11 @@
  * LICENSE file.
  */
 
+#include "maddy/test_maddy_parser.h"
+
 #include "gmock/gmock.h"
 
 #include "maddy/parser.h"
-#include "maddy/test_maddy_parser.h"
 
 // -----------------------------------------------------------------------------
 
@@ -53,8 +54,8 @@ TEST(MADDY_PARSER, ItShouldParseWithBitwiseConfig)
 TEST(MADDY_PARSER, ItShouldParseWithSmallConfig)
 {
   auto config = std::make_shared<maddy::ParserConfig>();
-  config->enabledParsers = maddy::types::EMPHASIZED_PARSER |
-                           maddy::types::STRONG_PARSER;
+  config->enabledParsers =
+    maddy::types::EMPHASIZED_PARSER | maddy::types::STRONG_PARSER;
 
   auto parser = std::make_shared<maddy::Parser>(config);
 
@@ -70,7 +71,8 @@ TEST(MADDY_PARSER, ItShouldParseInlineCodeInHeadlines)
   const std::string headlineTest = R"(
 # Some **test** markdown
 )";
-  const std::string expectedHTML = "<h1>Some <strong>test</strong> markdown</h1>";
+  const std::string expectedHTML =
+    "<h1>Some <strong>test</strong> markdown</h1>";
   std::stringstream markdown(headlineTest);
 
   auto parser = std::make_shared<maddy::Parser>();

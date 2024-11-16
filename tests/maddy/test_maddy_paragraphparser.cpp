@@ -15,14 +15,10 @@ class MADDY_PARAGRAPHPARSER : public ::testing::Test
 protected:
   std::shared_ptr<maddy::ParagraphParser> pParser;
 
-  void
-  SetUp() override
+  void SetUp() override
   {
-    this->pParser = std::make_shared<maddy::ParagraphParser>(
-      nullptr,
-      nullptr,
-      true
-    );
+    this->pParser =
+      std::make_shared<maddy::ParagraphParser>(nullptr, nullptr, true);
   }
 };
 
@@ -40,11 +36,7 @@ TEST_F(MADDY_PARAGRAPHPARSER, IsFinishedReturnsFalseInTheBeginning)
 
 TEST_F(MADDY_PARAGRAPHPARSER, ItReplacesMarkdownWithAnHtmlLine)
 {
-  std::vector<std::string> markdown = {
-    "Some text"
-    , "and some other text"
-    , ""
-  };
+  std::vector<std::string> markdown = {"Some text", "and some other text", ""};
   std::string expected = "<p>Some text and some other text </p>";
 
   for (std::string md : markdown)

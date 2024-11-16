@@ -13,7 +13,8 @@
 TEST(MADDY_IMAGEPARSER, ItReplacesMarkdownWithAnImage)
 {
   std::string text = "Some text ![Image Title](http://example.com/a.png)";
-  std::string expected = "Some text <img src=\"http://example.com/a.png\" alt=\"Image Title\"/>";
+  std::string expected =
+    "Some text <img src=\"http://example.com/a.png\" alt=\"Image Title\"/>";
   auto imageParser = std::make_shared<maddy::ImageParser>();
 
   imageParser->Parse(text);
@@ -23,8 +24,12 @@ TEST(MADDY_IMAGEPARSER, ItReplacesMarkdownWithAnImage)
 
 TEST(MADDY_IMAGEPARSER, ItReplacesMarkdownWithImages)
 {
-  std::string text = "Some text ![Image Title](http://example.com/a.png) bla ![Image Title](http://example.com/a.png)";
-  std::string expected = "Some text <img src=\"http://example.com/a.png\" alt=\"Image Title\"/> bla <img src=\"http://example.com/a.png\" alt=\"Image Title\"/>";
+  std::string text =
+    "Some text ![Image Title](http://example.com/a.png) bla ![Image "
+    "Title](http://example.com/a.png)";
+  std::string expected =
+    "Some text <img src=\"http://example.com/a.png\" alt=\"Image Title\"/> bla "
+    "<img src=\"http://example.com/a.png\" alt=\"Image Title\"/>";
   auto imageParser = std::make_shared<maddy::ImageParser>();
 
   imageParser->Parse(text);

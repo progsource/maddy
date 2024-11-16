@@ -1,0 +1,46 @@
+BasedOnStyle: Google
+AccessModifierOffset: -2
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+ConstructorInitializerIndentWidth: 2
+BracedInitializerIndentWidth: 2
+ContinuationIndentWidth: 2
+Cpp11BracedListStyle: true
+IndentAccessModifiers: false
+InsertNewlineAtEOF: true
+LambdaBodyIndentation: Signature
+AlignAfterOpenBracket: BlockIndent
+AllowShortIfStatementsOnASingleLine: Never
+BinPackArguments: false
+BinPackParameters: false
+AllowShortLambdasOnASingleLine: All
+SpacesBeforeTrailingComments: 1
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: false
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: true
+  IndentBraces: false
+  BeforeWhile: true
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+IncludeCategories:
+  - Regex:           '^<.*>'
+    Priority:       1
+  - Regex:           '^"maddy/.*'
+    Priority:       3
+  - Regex:           '.*'
+    Priority:       2
+SortIncludes: true
+IncludeBlocks: Regroup
+InsertTrailingCommas: Wrapped
