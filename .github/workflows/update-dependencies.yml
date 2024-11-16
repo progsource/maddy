@@ -1,5 +1,9 @@
 name: Update dependency versions
 
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   schedule:
     # This cron expression runs the job at 00:00 UTC on the first day of every month
@@ -38,13 +42,13 @@ jobs:
         git config --local user.name "github-actions"
         git config --local user.email "github-actions@github.com"
         git add .
-        git diff --cached --exit-code || echo "changed" >> $GITHUB_ENV
+        git diff --cached --exit-code || echo "changed=true" >> $GITHUB_OUTPUT
 
     - name: Create Pull Request
-      if: env.changed == 'changed'
+      if: steps.check_changes.outputs.changed == 'true'
       run: |
         git commit -m "Update dependency versions"
         git push origin HEAD:update-dependency-versions
-        gh pr create --base main --head update-dependency-versions --title "Update dependency versions" --body "This pull request updates the dependency versions in files."
+        gh pr create --base master --head update-dependency-versions --title "Update dependency versions" --body "This pull request updates the dependency versions in files."
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
