@@ -72,17 +72,6 @@ public:
    */
   Parser(std::shared_ptr<ParserConfig> config = nullptr) : config(config)
   {
-    // deprecated backward compatibility
-    // will be removed in 1.4.0 latest including the booleans
-    if (this->config && !this->config->isEmphasizedParserEnabled)
-    {
-      this->config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER;
-    }
-    if (this->config && !this->config->isHTMLWrappedInParagraph)
-    {
-      this->config->enabledParsers |= maddy::types::HTML_PARSER;
-    }
-
     if (!this->config ||
         (this->config->enabledParsers & maddy::types::BREAKLINE_PARSER) != 0)
     {

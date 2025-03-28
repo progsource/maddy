@@ -70,10 +70,8 @@ std::stringstream markdownInput("");
 
 // config is optional
 std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
-// config->isEmphasizedParserEnabled = false; // default true - this flag is deprecated
-// config->isHTMLWrappedInParagraph = false; // default true - this flag is deprecated
-config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER; // equivalent to !isEmphasizedParserEnabled
-config->enabledParsers |= maddy::types::HTML_PARSER; // equivalent to !isHTMLWrappedInParagraph
+config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER; // disable emphasized parser
+config->enabledParsers |= maddy::types::HTML_PARSER; // do not wrap HTML in paragraph
 
 std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
 std::string htmlOutput = parser->Parse(markdownInput);
