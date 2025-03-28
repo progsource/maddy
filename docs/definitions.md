@@ -7,9 +7,9 @@ destroy the output, if there was HTML in your markdown.
 The Parser expects you to use spaces and not tabs for indentation in the
 markdown.
 
-If a line starts with `<` and `config->isHTMLWrappedInParagraph` is false, it
-expects that the upcoming line is HTML and therefor will not be surrounded by a
-paragraph.
+If a line starts with `<` and `config->enabledParsers |= maddy::types::HTML_PARSER;`
+is set, it expects that the upcoming line is HTML and therefor will not be
+surrounded by a paragraph.
 
 ## Headlines
 
@@ -279,7 +279,7 @@ results in
 
 ## emphasized
 
-This can be disabled by setting `config->isEmphasizedParserEnabled = false`.
+This can be disabled by setting `config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER;`.
 
 ```
 _emphasized text_

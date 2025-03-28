@@ -14,10 +14,13 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
+## version 1.4.0 2025-03-28
+
 * ![**CHANGED**](https://img.shields.io/badge/-CHANGED-%23e90) Updated google test to v1.16.0.
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) clang-format
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) automatic update dependencies ci
 * ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) `(This is a [link](/ABC/some file) (the URL will include this).)` should not put the later parenthesis into the link url.
+* ![**REMOVED**](https://img.shields.io/badge/-REMOVED-%23900) config flags `isEmphasizedParserEnabled` and `isHTMLWrappedInParagraph`. Use `config->enabledParsers &= ~maddy::types::EMPHASIZED_PARSER;` and `config->enabledParsers |= maddy::types::HTML_PARSER;` to gain the same behavior as if the previous config flags were set to `false`.
 
 ## version 1.3.0 2023-08-26
 

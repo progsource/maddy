@@ -1,11 +1,13 @@
 name: run-tests
 run-name: test ${{ github.ref }}
 on:
-  pull_request:
   push:
     branches:
       - master
-      - dev
+  pull_request:
+  pull_request_target:
+    branches:
+      - master
 jobs:
   test-on-ubuntu:
     runs-on: ubuntu-latest
