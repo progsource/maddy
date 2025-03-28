@@ -25,7 +25,7 @@ jobs:
           cmake -DMADDY_CREATE_PACKAGE=ON ..
           make maddy_package
 
-     - name: Get current tag message
+      - name: Get current tag message
         id: tag-message
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
