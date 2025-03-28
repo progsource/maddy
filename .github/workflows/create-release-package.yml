@@ -25,10 +25,24 @@ jobs:
           cmake -DMADDY_CREATE_PACKAGE=ON ..
           make maddy_package
 
+     - name: Get current tag message
+        id: tag-message
+        run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          TAG_MESSAGE=$(git for-each-ref refs/tags/$TAG_NAME --format='%(contents)')
+          echo "message<<EOF" >> $GITHUB_OUTPUT
+          echo "$TAG_MESSAGE" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: create release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/maddy-src.zip
           tag: ${{ github.ref }}
-          body: "You can find all changes of this release in the [changelog](https://github.com/progsource/maddy/blob/master/CHANGELOG.md)"
+          body: |
+            ${{ steps.tag-message.outputs.message }}
+
+            ---
+
+            You can find all changes of this release in the [changelog](https://github.com/progsource/maddy/blob/master/CHANGELOG.md)
