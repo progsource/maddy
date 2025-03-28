@@ -10,17 +10,10 @@ improve the code? Then [create a GitHub issue](https://github.com/progsource/mad
 ## Creating Pull-Requests
 
 * Use a branch other than master.
-* Add yourself to the `AUTHORS` file.
-* Try to stick with the code style the files are having right now.
-* Write in your commit messages what/why you did something. Often times a one-liner might be enough, but if you want to write more, make an empty line in between like:
-  ```
-  Short description
-
-  More and longer text for the commit message with some more information.
-  That can go over multiple lines.
-  ```
-  Do not include Github issue ticket numbers inside commit messages.
+* Feel free to add yourself to the `AUTHORS` file. (optional)
+* Use clang-format to format the code.
+* Write in your commit messages what/why you did something. Often times a one-liner might be enough.
 * Explain for what your PR is for - like providing a use-case or something similar.
 * Update documentation of the Markdown syntax if anything changed there. (`docs/definitions.md`)
 * Add a changelog entry at "Upcoming" inside of `CHANGELOG.md`
-* Make sure, that the tests are successful.
+* Make sure, that the tests are successful and if you wrote a bugfix, to have a test, that highlights the issue.
