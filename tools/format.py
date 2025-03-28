@@ -123,7 +123,7 @@ def main():
   """
   if len(sys.argv) != 2:
     print(
-      "Usage: python check_clang_format.py <dry_run|format>"
+      "Usage: python format.py <dry_run|format>"
     )
     sys.exit(1)
   else:

@@ -37,6 +37,22 @@ TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithLinks)
   ASSERT_EQ(expected, text);
 }
 
+TEST(
+  MADDY_LINKPARSER, ItReplacesMarkdownProperlyEvenWithMultipleParenthesisInLine
+)
+{
+  std::string text =
+    "(This is a [link](/ABC/some file) (the URL will include this).)";
+  std::string expected =
+    "(This is a <a href=\"/ABC/some file\">link</a> (the URL will include "
+    "this).)";
+  auto linkParser = std::make_shared<maddy::LinkParser>();
+
+  linkParser->Parse(text);
+
+  ASSERT_EQ(expected, text);
+}
+
 // -----------------------------------------------------------------------------
 
 class DISABLED_MADDY_LINKPARSER : public ::testing::Test
