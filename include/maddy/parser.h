@@ -153,7 +153,7 @@ public:
     }
 
     // make sure, that all parsers are finished
-    if (currentBlockParser)
+    while (currentBlockParser)
     {
       std::string emptyLine = "";
       currentBlockParser->AddLine(emptyLine);
