@@ -40,10 +40,15 @@ public:
    */
   void Parse(std::string& line) override
   {
-    static std::regex re(R"(\[([^\]]*)\]\(([^)]*)\))");
-    static std::string replacement = "<a href=\"$2\">$1</a>";
-
+    //Match [name](http:://link "title text")
+    static std::regex re(R"(\[([^\]]*)\]\(([^\)\" ]*) \"([^\"]*)\"\))");
+    static std::string replacement = "<a href=\"$2\" title=\"$3\">$1</a>";
     line = std::regex_replace(line, re, replacement);
+
+    //Match [name](http:://link)
+    static std::regex re2(R"(\[([^\]]*)\]\(([^)]*)\))");
+    static std::string replacement2 = "<a href=\"$2\">$1</a>";
+    line = std::regex_replace(line, re2, replacement2);
   }
 }; // class LinkParser
 
