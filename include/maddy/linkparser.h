@@ -41,12 +41,14 @@ public:
   void Parse(std::string& line) override
   {
     //Match [name](http:://link "title text")
-    static std::regex re(R"(\[([^\]]*)\]\(([^\)\" ]*) \"([^\"]*)\"\))");
+    //NOTE:  the 'no quote' bit at the beginning (^") is a hack for now: there should
+    // eventually be something that replaces it with '%22'.
+    static std::regex re(R"(\[([^\]]*)\]\( *([^)^ ^"]*) *\"([^\"]*)\" *\))");
     static std::string replacement = "<a href=\"$2\" title=\"$3\">$1</a>";
     line = std::regex_replace(line, re, replacement);
 
     //Match [name](http:://link)
-    static std::regex re2(R"(\[([^\]]*)\]\(([^)]*)\))");
+    static std::regex re2(R"(\[([^\]]*)\]\( *([^)^ ^"]*) *\))");
     static std::string replacement2 = "<a href=\"$2\">$1</a>";
     line = std::regex_replace(line, re2, replacement2);
   }
