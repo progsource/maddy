@@ -41,6 +41,14 @@ results in
 <a href="http://example.com">Text of the link</a>
 ```
 
+```
+[Text of the link](http://example.com "title text")
+```
+results in
+```html
+<a href="http://example.com" title="title text">Text of the link</a>
+```
+
 ## Lists
 
 ### unordered

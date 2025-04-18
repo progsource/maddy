@@ -13,6 +13,10 @@ maddy uses [semver versioning](https://semver.org/).
 * ![**REMOVED**](https://img.shields.io/badge/-REMOVED-%23900) for now removed features.
 
 ## Upcoming
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Correctly parse links with title text, i.e. `[link](http://example.com "example")`.
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Do not create invalid URLs from links with spaces, i.e. `[link](/ABC/some file)`.
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Do not create invalid HTML from links with quotes, i.e. `[link](/ABC/some"file)`.
+
 
 ## version 1.4.0 2025-03-28
 
