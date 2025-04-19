@@ -54,7 +54,7 @@ TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithSpacesAfterLink)
 
 TEST(MADDY_LINKPARSER, ItHandlesURLsWithOfficiallyIllegalCharacters)
 {
-  //Some links in the real world have characters that are not
+  // Some links in the real world have characters that are not
   // 'official' characters that are supposedly allowed in URLs.
   std::string text =
     "Wikipedia's [Möbius strip](https://en.wikipedia.org/wiki/Möbius_strip) link.";
@@ -85,11 +85,9 @@ TEST(
 
 TEST(MADDY_LINKPARSER, ItDoesntReplaceMarkdownWithSpaceInURL)
 {
-  //spaces are not allowed in URLs, so don't match them.
-  std::string text =
-    "This is an invalid [link](/ABC/some file)";
-  std::string expected =
-    "This is an invalid [link](/ABC/some file)";
+  // Spaces are not allowed in URLs, so don't match them.
+  std::string text = "This is an invalid [link](/ABC/some file)";
+  std::string expected = "This is an invalid [link](/ABC/some file)";
   auto linkParser = std::make_shared<maddy::LinkParser>();
 
   linkParser->Parse(text);
@@ -123,7 +121,8 @@ TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithSpacesWithTitleText)
 
 TEST(MADDY_LINKPARSER, ItReplacesMarkdownWithMoreSpacesWithTitleText)
 {
-  std::string text = "Link to [name](http:://example.com     \"title text\"    )";
+  std::string text =
+    "Link to [name](http:://example.com     \"title text\"    )";
   std::string expected =
     "Link to <a href=\"http:://example.com\" title=\"title text\">name</a>";
   auto linkParser = std::make_shared<maddy::LinkParser>();
@@ -197,7 +196,8 @@ TEST_F(DISABLED_MADDY_LINKPARSER, ItReplacesNoImageMarkdownWithLinks)
 
 TEST(DISABLED_MADDY_LINKPARSER, ItReplacesMarkdownWithQuoteInLink)
 {
-  //This is legal markdown, but hard to parse with regexes; dropping it here for a future update.
+  // This is legal markdown, but hard to parse with regexes; dropping it
+  // here for a future update.
   std::string text = "Some text [Link Title](http://example.com/\"foo ) bla.";
   std::string expected =
     "Some text <a href=\"http://example.com/%22foo\">Link Title</a> bla.";
