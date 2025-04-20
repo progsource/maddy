@@ -98,6 +98,21 @@ make
 make test # or run the executable in ../build/MaddyTests
 ```
 
+## How to run the benchmarks
+
+To get proper test results, the benchmarks should always be compiled as
+release build.
+
+```shell
+git clone https://github.com/progsource/maddy.git
+cd maddy
+mkdir tmp
+cd tmp
+cmake -DMADDY_BUILD_WITH_BENCH=ON -DCMAKE_BUILD_TYPE=Release ..
+make BUILD_TYPE=Release
+../build/maddy_benchmark
+```
+
 ## How to contribute
 
 There are different possibilities:

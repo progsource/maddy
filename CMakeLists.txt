@@ -19,6 +19,7 @@ if(${MADDY_BUILD_WITH_TESTS})
   enable_testing()
 endif()
 
+option(MADDY_BUILD_WITH_BENCH "enable benchmarks" OFF)
 option(MADDY_CREATE_PACKAGE "create a package for a version release" OFF)
 
 # ------------------------------------------------------------------------------
@@ -49,10 +50,14 @@ if(${MADDY_BUILD_WITH_TESTS})
   add_subdirectory(tests)
 endif()
 
+if(${MADDY_BUILD_WITH_BENCH})
+  add_subdirectory(bench)
+endif()
+
 # ------------------------------------------------------------------------------
 
 if(${MADDY_CREATE_PACKAGE})
-  set(MADDY_PACKAGE_FILES include/ CMakeLists.txt LICENSE)
+  set(MADDY_PACKAGE_FILES include/ CMakeLists.txt LICENSE AUTHORS)
   add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-src.zip
     COMMAND ${CMAKE_COMMAND} -E tar c ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-src.zip --format=zip -- ${MADDY_PACKAGE_FILES}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
