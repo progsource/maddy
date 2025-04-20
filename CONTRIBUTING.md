@@ -16,4 +16,4 @@ improve the code? Then [create a GitHub issue](https://github.com/progsource/mad
 * Explain for what your PR is for - like providing a use-case or something similar.
 * Update documentation of the Markdown syntax if anything changed there. (`docs/definitions.md`)
 * Add a changelog entry at "Upcoming" inside of `CHANGELOG.md`
-* Make sure, that the tests are successful and if you wrote a bugfix, to have a test, that highlights the issue.
+* Make sure that the tests are successful and if you wrote a bugfix, to have a test that highlights the issue.
