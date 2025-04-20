@@ -35,6 +35,10 @@ file(GLOB_RECURSE MADDY_BENCHMARK_FILES
 
 # ------------------------------------------------------------------------------
 
+add_compile_definitions(CURRENT_FILE_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
+
+# ------------------------------------------------------------------------------
+
 add_executable(
   maddy_benchmark
     ${MADDY_BENCHMARK_FILES}

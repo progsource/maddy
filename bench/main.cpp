@@ -15,7 +15,8 @@
 
 int main()
 {
-  static const std::string markdownFile = "../docs/definitions.md";
+  static const std::string markdownFile =
+    std::string(CURRENT_FILE_PATH) + "/benchmark_test.md";
   std::stringstream buffer;
 
   {
