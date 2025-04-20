@@ -57,11 +57,12 @@ TEST(MADDY_LINKPARSER, ItHandlesURLsWithOfficiallyIllegalCharacters)
   // Some links in the real world have characters that are not
   // 'official' characters that are supposedly allowed in URLs.
   std::string text =
-    "Wikipedia's [Möbius strip](https://en.wikipedia.org/wiki/"
-    "Möbius_strip) link.";
+    "Wikipedia's [Möbius strip]"
+    "(https://en.wikipedia.org/wiki/Möbius_strip) link.";
   std::string expected =
-    "Wikipedia's <a href=\"https://en.wikipedia.org/wiki/"
-    "Möbius_strip\">Möbius strip</a> link.";
+    "Wikipedia's <a "
+    "href=\"https://en.wikipedia.org/wiki/Möbius_strip\">"
+    "Möbius strip</a> link.";
   auto linkParser = std::make_shared<maddy::LinkParser>();
 
   linkParser->Parse(text);
