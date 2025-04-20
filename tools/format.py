@@ -60,6 +60,8 @@ def format_files(dry_run):
                                      during the actual formatting process.
   """
   patterns = [
+    "bench/**/*.h",
+    "bench/**/*.cpp",
     "include/**/*.h",
     "tests/**/*.h",
     "tests/**/*.cpp",
