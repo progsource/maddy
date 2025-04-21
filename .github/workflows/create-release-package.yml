@@ -29,10 +29,12 @@ jobs:
         id: tag-message
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
-          TAG_MESSAGE=$(git tag -l --format='%(contents)' $TAG_NAME)
+          echo "TAG_NAME: $TAG_NAME"
+          TAG_MESSAGE=$(git tag -l --format='%(contents)' "$TAG_NAME")
           echo "message<<EOF" >> $GITHUB_OUTPUT
           echo "$TAG_MESSAGE" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+          echo "TAG_MESSAGE: $TAG_MESSAGE"
 
       - name: create release
         uses: svenstaro/upload-release-action@v2
@@ -40,7 +42,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/maddy-src.zip
           tag: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+          release_name: ${{ github.ref_name }}
           body: |
             ${{ steps.tag-message.outputs.message }}
 
