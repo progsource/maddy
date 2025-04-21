@@ -40,9 +40,10 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/maddy-src.zip
           tag: ${{ github.ref }}
+          release_name: ${{ github.ref }}
           body: |
             ${{ steps.tag-message.outputs.message }}
 
             ---
 
-            You can find all changes of this release in the [changelog](https://github.com/progsource/maddy/blob/master/CHANGELOG.md)
+            [full changelog](https://github.com/progsource/maddy/blob/master/CHANGELOG.md)
