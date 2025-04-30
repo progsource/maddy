@@ -40,12 +40,31 @@ public:
    */
   void Parse(std::string& line) override
   {
+    // This version of the regex is changed exactly the same way
+    // that the regex for the emphasized parser was changed, and
+    // it then passes all the 'disabled' tests in the 'strong parser'
+    // test, but then it fails general parsing.  For some reason,
+    // "__text__" translates "<i></i>text<i></i>" even though there
+    // are no word boundaries at the correct places.  It's weird!
+    // 
+    //static std::vector<std::regex> res{
+    //  std::regex{
+    //    R"((?!.*`.*|.*<code>.*)\b\*\*(?![\s])(?!.*`.*|.*<\/code>.*)"
+    //     "(.*?[^\s])\*\*\b(?!.*`.*|.*<\/code>.*))"
+    //  },
+    //  std::regex{
+    //    R"((?!.*`.*|.*<code>.*)\b__(?![\s])(?!.*`.*|.*<\/code>.*)"
+    //     "(.*?[^\s])__\b(?!.*`.*|.*<\/code>.*))"
+    //  }
+    //};
     static std::vector<std::regex> res{
       std::regex{
-        R"((?!.*`.*|.*<code>.*)\*\*(?!.*`.*|.*<\/code>.*)([^\*\*]*)\*\*(?!.*`.*|.*<\/code>.*))"
+        R"((?!.*`.*|.*<code>.*)\*\*(?!.*`.*|.*<\/code>.*)"
+         "([^\*\*]*)\*\*(?!.*`.*|.*<\/code>.*))"
       },
       std::regex{
-        R"((?!.*`.*|.*<code>.*)__(?!.*`.*|.*<\/code>.*)([^__]*)__(?!.*`.*|.*<\/code>.*))"
+        R"((?!.*`.*|.*<code>.*)__(?!.*`.*|.*<\/code>.*)"
+         "([^__]*)__(?!.*`.*|.*<\/code>.*))"
       }
     };
     static std::string replacement = "<strong>$1</strong>";
