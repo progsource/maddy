@@ -132,7 +132,9 @@ TEST(MADDY_STRONGPARSER, ItReplacesUnderscoresWithMultipleWords)
 TEST(DISABLED_MADDY_STRONGPARSER, ItAllowsTripleUnderscores)
 {
   // I'm not sure if this is standard or not, but this is how the github
-  // markdown parser behaves.  Other things I've seen want it to *not* match.
+  // markdown parser behaves.  Other things I've seen want it to *not*
+  // match.
+
   std::string text = "some ___text testing it__ out";
   std::string expected = "some <strong>_text testing it</strong> out";
   auto strongParser = std::make_shared<maddy::StrongParser>();
