@@ -58,10 +58,12 @@ public:
     //   }
     // };
     static std::vector<std::regex> res{
-      std::regex{R"((?!.*`.*|.*<code>.*)\*\*(?!.*`.*|.*<\/code>.*)"
-                 "([^\*\*]*)\*\*(?!.*`.*|.*<\/code>.*))"},
-      std::regex{R"((?!.*`.*|.*<code>.*)__(?!.*`.*|.*<\/code>.*)"
-                 "([^__]*)__(?!.*`.*|.*<\/code>.*))"}
+      std::regex{
+        R"((?!.*`.*|.*<code>.*)\*\*(?!.*`.*|.*<\/code>.*)([^\*\*]*)\*\*(?!.*`.*|.*<\/code>.*))"
+      },
+      std::regex{
+        R"((?!.*`.*|.*<code>.*)__(?!.*`.*|.*<\/code>.*)([^__]*)__(?!.*`.*|.*<\/code>.*))"
+      }
     };
     static std::string replacement = "<strong>$1</strong>";
     for (const auto& re : res)
