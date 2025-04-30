@@ -67,8 +67,9 @@ TEST(MADDY_EMPHASIZEDPARSER, ItReplacesUnderscoresWithMultipleWords)
 
 TEST(MADDY_EMPHASIZEDPARSER, ItAllowsDoubleUnderscores)
 {
-  // I'm not sure if this is standard or not, but this is how the github markdown
-  // parser behaves.  Other things I've seen want it to *not* match.
+  // I'm not sure if this is standard or not, but this is how the github
+  // markdown parser behaves.  Other things I've seen want it to *not*
+  // match.
   std::string text = "some __text testing it_ out";
   std::string expected = "some <em>_text testing it</em> out";
   auto emphasizedParser = std::make_shared<maddy::EmphasizedParser>();
@@ -80,8 +81,10 @@ TEST(MADDY_EMPHASIZEDPARSER, ItAllowsDoubleUnderscores)
 
 TEST(MADDY_EMPHASIZEDPARSER, ItDoesntReplaceUnderscoresInsideCodeBlocks)
 {
-  std::string text = "Stuff inside <code> blocks _shouldn't be emphasized_ </code> at all";
-  std::string expected = "Stuff inside <code> blocks _shouldn't be emphasized_ </code> at all";
+  std::string text =
+    "Stuff inside <code> blocks _shouldn't be emphasized_ </code> at all";
+  std::string expected =
+    "Stuff inside <code> blocks _shouldn't be emphasized_ </code> at all";
   auto emphasizedParser = std::make_shared<maddy::EmphasizedParser>();
 
   emphasizedParser->Parse(text);
@@ -92,7 +95,8 @@ TEST(MADDY_EMPHASIZEDPARSER, ItDoesntReplaceUnderscoresInsideCodeBlocks)
 TEST(MADDY_EMPHASIZEDPARSER, ItDoesNotReplaceUnderscoresInURLs)
 {
   std::string text = "[Link Title](http://example.com/what_you_didn't_know)";
-  std::string expected = "[Link Title](http://example.com/what_you_didn't_know)";
+  std::string expected =
+    "[Link Title](http://example.com/what_you_didn't_know)";
   auto emphasizedParser = std::make_shared<maddy::EmphasizedParser>();
 
   emphasizedParser->Parse(text);
