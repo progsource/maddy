@@ -14,6 +14,7 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Only create emphasis tags at word boundaries, i.e. `not only_internal_underscores`.
 * ...
 
 ## version 1.5.0 2025-04-21
