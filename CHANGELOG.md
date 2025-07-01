@@ -14,7 +14,7 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
-* ...
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Added CMake install and find_package() support.
 
 ## version 1.5.0 2025-04-21
 
