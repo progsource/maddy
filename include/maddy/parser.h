@@ -59,7 +59,7 @@ public:
    */
   static const std::string& version()
   {
-    static const std::string v = "1.5.0";
+    static const std::string v = "1.5.0"; // MADDY_VERSION_LINE_REPLACEMENT
     return v;
   }
 
