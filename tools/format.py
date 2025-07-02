@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 # required clang-format version
-REQUIRED_VERSION = "18.1.3"
+REQUIRED_VERSION = '18.1.3'
 
 def check_clang_format_version():
   """
@@ -37,13 +37,13 @@ def check_clang_format_version():
         break
 
     if version_line != REQUIRED_VERSION:
-      print(f"Error: Required clang-format version is "
-        f"{REQUIRED_VERSION}, but found {version_line}.")
+      print(f'Error: Required clang-format version is '
+        f'{REQUIRED_VERSION}, but found {version_line}.')
       sys.exit(1)
     else:
       print('clang-format version equals the required version.')
   except subprocess.CalledProcessError as e:
-    print(f"Error checking clang-format version: {e.stderr}")
+    print(f'Error checking clang-format version: {e.stderr}')
     sys.exit(1)
 
 def format_files(dry_run):
@@ -60,11 +60,11 @@ def format_files(dry_run):
                                      during the actual formatting process.
   """
   patterns = [
-    "bench/**/*.h",
-    "bench/**/*.cpp",
-    "include/**/*.h",
-    "tests/**/*.h",
-    "tests/**/*.cpp",
+    'bench/**/*.h',
+    'bench/**/*.cpp',
+    'include/**/*.h',
+    'tests/**/*.h',
+    'tests/**/*.cpp',
   ]
 
   files_to_format = []
@@ -73,10 +73,9 @@ def format_files(dry_run):
     files_to_format.extend(matched_files)
 
   if not files_to_format:
-    print("No files to format.")
+    print('No files to format.')
     return
 
-  # Create a space-separated string of files
   patterns_arg = ' '.join(file.replace('\\', '/') for file in files_to_format)
 
   cwd = os.getcwd()
@@ -92,13 +91,13 @@ def format_files(dry_run):
       cwd=cwd
     )
     if result.returncode != 0:
-      print("Files that need formatting:")
+      print('Files that need formatting:')
       print(result.stdout)
-      print("Error output:")
+      print('Error output:')
       print(result.stderr)
       sys.exit(1)
     else:
-      print("no changes found")
+      print('no changes found')
   else:
     # Format the files in place
     command = f'clang-format --style=file -i {patterns_arg}'
@@ -110,7 +109,7 @@ def format_files(dry_run):
       cwd=cwd
     )
     if result.returncode != 0:
-      print("Error formatting files:")
+      print('Error formatting files:')
       print(result.stderr)
       sys.exit(1)
     else:
@@ -125,21 +124,21 @@ def main():
   """
   if len(sys.argv) != 2:
     print(
-      "Usage: python format.py <dry_run|format>"
+      'Usage: python format.py <dry_run|format>'
     )
     sys.exit(1)
   else:
-    print(f"Running format with {sys.argv[1]}")
+    print(f'Running format with {sys.argv[1]}')
 
   dry_run = False
-  if sys.argv[1] == "dry_run":
+  if sys.argv[1] == 'dry_run':
     dry_run = True
-  elif sys.argv[1] != "format":
-    print("Invalid argument. Use 'dry_run' or 'format'.")
+  elif sys.argv[1] != 'format':
+    print('Invalid argument. Use "dry_run" or "format".')
     sys.exit(1)
 
   check_clang_format_version()
   format_files(dry_run)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   main()
