@@ -1,6 +1,7 @@
 #!/bin/python
 #
 # maddy update dependencies
+#
 # This project is licensed under the MIT license. For more information see the
 # LICENSE file.
 import os
@@ -27,8 +28,8 @@ def get_cmake_files(directory, ignored_dirs=None):
     # Modify dirs in place to skip ignored directories
     dirs[:] = [d for d in dirs if d not in ignored_dirs]
 
-    if "CMakeLists.txt" in files:
-      cmakelists_paths.append(os.path.join(root, "CMakeLists.txt"))
+    if 'CMakeLists.txt' in files:
+      cmakelists_paths.append(os.path.join(root, 'CMakeLists.txt'))
 
   return cmakelists_paths
 
@@ -49,29 +50,25 @@ def get_last_dependency_version(url):
       ValueError: If the provided URL is not in the expected format.
       Exception: If there is an error fetching data from the GitHub API.
   """
-  # Remove the .git suffix if it exists
   if url.endswith('.git'):
     url = url[:-4]
 
-  # Split the URL to extract owner and repository name
   parts = url.split('/')
   if len(parts) < 5 or parts[2] != 'github.com':
-    raise ValueError(f"Invalid GitHub repository URL {url}")
+    raise ValueError(f'Invalid GitHub repository URL {url}')
 
   owner = parts[3]
   repo = parts[4]
 
-  # GitHub API endpoint for releases
-  api_url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
+  api_url = f'https://api.github.com/repos/{owner}/{repo}/releases/latest'
 
-  # Make a GET request to the GitHub API
   response = requests.get(api_url)
 
   if response.status_code == 200:
     release_data = response.json()
     return release_data['tag_name']  # Return the latest version tag
   else:
-    raise Exception(f"Error fetching data from GitHub API: {response.status_code} - {response.text}")
+    raise Exception(f'Error fetching data from GitHub API: {response.status_code} - {response.text}')
 
 def get_current_version_from_fetch_content(cmake_code):
   """
@@ -102,14 +99,10 @@ def update_fetch_content_versions(cmake_file_path):
   with open(cmake_file_path, 'r') as file:
     cmake_code = file.read()
 
-  # Regular expression to find FetchContent blocks
   fetch_content_pattern = r'FetchContent_Declare\s*\(\s*(.*?)\s*\)'
-
-  # Find all FetchContent blocks
   fetch_content_blocks = re.findall(fetch_content_pattern, cmake_code, re.DOTALL)
 
   for block in fetch_content_blocks:
-    # Extract the GIT_REPOSITORY line
     repo_pattern = r'GIT_REPOSITORY\s+([^\s]+)'
     repo_match = re.search(repo_pattern, block)
 
@@ -119,13 +112,11 @@ def update_fetch_content_versions(cmake_file_path):
       latest_version = get_last_dependency_version(repo_url)
 
       if current_version != latest_version:
-        # Replace the old version with the new version in the CMake code
         new_block = re.sub(r'GIT_TAG\s+([^\s]+)', f'GIT_TAG {latest_version}', block)
         cmake_code = cmake_code.replace(block, new_block)
 
-  # Write the updated CMake code back to the file
   with open(cmake_file_path, 'w', encoding='utf-8', newline='\n') as file:
-    file.write(cmake_code.replace('\r\n', '\n'))  # Ensure LF line
+    file.write(cmake_code.replace('\r\n', '\n'))
 
 def main():
   """
@@ -134,22 +125,22 @@ def main():
   ignoring specified directories.
   """
   if len(sys.argv) < 2:
-    print("Usage: python update_dependencies.py <directory_path> [ignored_dirs...]")
+    print('Usage: python update_dependencies.py <directory_path> [ignored_dirs...]')
     sys.exit(1)
 
   directory_path = sys.argv[1]
   ignored_dirs = sys.argv[2:]  # Remaining arguments are ignored directories
 
   if not os.path.isdir(directory_path):
-    print(f"The provided path '{directory_path}' is not a valid directory.")
+    print(f'The provided path "{directory_path}" is not a valid directory.')
     sys.exit(1)
 
   cmake_files = get_cmake_files(directory_path, ignored_dirs)
 
   for cmake_file in cmake_files:
-    print(f"Updating {cmake_file}...")
+    print(f'Updating {cmake_file}...')
     update_fetch_content_versions(cmake_file)
-    print(f"Updated {cmake_file} successfully.")
+    print(f'Updated {cmake_file} successfully.')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
