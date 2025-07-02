@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.25)
 
-project(maddy VERSION 1.5.0)
+project(maddy VERSION 1.5.0) # MADDY_VERSION_LINE_REPLACEMENT
 
 # ------------------------------------------------------------------------------
 
