@@ -70,6 +70,11 @@ def format_files(dry_run):
   files_to_format = []
   for pattern in patterns:
     matched_files = glob.glob(pattern, recursive=True)
+
+    for file in matched_files:
+      if '\/tmp\/' in file or '\\tmp\\' in file:
+        matched_files.remove(file)
+
     files_to_format.extend(matched_files)
 
   if not files_to_format:

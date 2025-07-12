@@ -12,17 +12,26 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
         with:
-          cmakeVersion: "~3.25.0"  # <--= optional, use most recent 3.25.x version
-          ninjaVersion: "^1.11.1"  # <--= optional, use most recent 1.x version
+          cmakeVersion: "~3.25.0"
+          ninjaVersion: "^1.11.1"
       - name: build
         run: |
           mkdir tmp
           cd tmp
-          cmake -DMADDY_BUILD_WITH_TESTS=ON ..
+          cmake -DMADDY_BUILD_WITH_TESTS=ON -DCMAKE_INSTALL_PREFIX=./install ..
           make -j4
+          make install
       - name: run tests
         run: |
           ./build/MaddyTests
+      - name: test find_package
+        run: |
+          cd tests/cmake/find_package
+          mkdir tmp
+          cd tmp
+          cmake -DCMAKE_PREFIX_PATH=../../../tmp/install ..
+          make -j4
+          ./maddy_find_package_example
 
   test-on-windows:
     runs-on: windows-latest
@@ -30,8 +39,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
         with:
-          cmakeVersion: "~3.25.0"  # <--= optional, use most recent 3.25.x version
-          ninjaVersion: "^1.11.1"  # <--= optional, use most recent 1.x version
+          cmakeVersion: "~3.25.0"
+          ninjaVersion: "^1.11.1"
       - name: build
         run: |
           mkdir tmp
@@ -48,8 +57,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
         with:
-          cmakeVersion: "~3.25.0"  # <--= optional, use most recent 3.25.x version
-          ninjaVersion: "^1.11.1"  # <--= optional, use most recent 1.x version
+          cmakeVersion: "~3.25.0"
+          ninjaVersion: "^1.11.1"
       - name: build
         run: |
           mkdir tmp
