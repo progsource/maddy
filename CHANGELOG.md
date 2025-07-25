@@ -14,6 +14,10 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
+* ...
+
+## version 1.6.0 2025-07-26
+
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Added CMake install and find_package() support.
 * ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) Script to update maddy version number in all files.
 
