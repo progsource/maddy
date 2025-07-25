@@ -1,7 +1,7 @@
 # maddy
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version: 1.5.0](https://img.shields.io/badge/Version-1.5.0-brightgreen.svg)](https://semver.org/) <!-- MADDY_VERSION_LINE_REPLACEMENT -->
+[![Version: 1.6.0](https://img.shields.io/badge/Version-1.6.0-brightgreen.svg)](https://semver.org/) <!-- MADDY_VERSION_LINE_REPLACEMENT -->
 
 maddy is a C++ Markdown to HTML **header-only** parser library.
 
