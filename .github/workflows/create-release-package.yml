@@ -28,6 +28,7 @@ jobs:
       - name: Get current tag message
         id: tag-message
         run: |
+          git fetch --tags --force
           TAG_NAME=${GITHUB_REF#refs/tags/}
           echo "TAG_NAME: $TAG_NAME"
           TAG_MESSAGE=$(git tag -l --format='%(contents)' "$TAG_NAME")
