@@ -9,7 +9,7 @@ jobs:
   test-on-ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: "~3.25.0"
@@ -36,7 +36,7 @@ jobs:
   test-on-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: "~3.25.0"
@@ -54,7 +54,7 @@ jobs:
   test-on-osx:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: "~3.25.0"
