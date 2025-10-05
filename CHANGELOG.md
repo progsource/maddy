@@ -14,6 +14,7 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) One-liner quote is not producing any output.
 * ...
 
 ## version 1.6.0 2025-07-26
