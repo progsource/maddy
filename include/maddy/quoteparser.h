@@ -99,6 +99,8 @@ public:
         this->childParser = nullptr;
       }
 
+      this->finishQuote(finish);
+
       return;
     }
 
@@ -107,11 +109,7 @@ public:
       this->parseLine(line);
     }
 
-    if (finish)
-    {
-      this->result << "</blockquote>";
-      this->isFinished = true;
-    }
+    this->finishQuote(finish);
 
     this->result << line;
   }
@@ -145,6 +143,15 @@ protected:
 private:
   bool isStarted;
   bool isFinished;
+
+  void finishQuote(bool finish)
+  {
+    if (finish)
+    {
+      this->result << "</blockquote>";
+      this->isFinished = true;
+    }
+  }
 }; // class QuoteParser
 
 // -----------------------------------------------------------------------------
