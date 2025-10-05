@@ -40,8 +40,10 @@ public:
    */
   void Parse(std::string& line) override
   {
+    // Modifed from previous version, with help from
+    // https://stackoverflow.com/questions/61346949/regex-for-markdown-emphasis
     static std::regex re(
-      R"((?!.*`.*|.*<code>.*)_(?!.*`.*|.*<\/code>.*)([^_]*)_(?!.*`.*|.*<\/code>.*))"
+      R"((?!.*`.*|.*<code>.*)\b_(?![\s])(?!.*`.*|.*<\/code>.*)(.*?[^\s])_\b(?!.*`.*|.*<\/code>.*))"
     );
     static std::string replacement = "<em>$1</em>";
 
