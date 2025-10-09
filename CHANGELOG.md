@@ -14,6 +14,7 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
+* ![**CHANGED**](https://img.shields.io/badge/-CHANGED-%23e90) Updated google test to v1.17.0.
 * ...
 
 ## version 1.6.0 2025-07-26
