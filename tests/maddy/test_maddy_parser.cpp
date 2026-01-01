@@ -21,6 +21,18 @@ TEST(MADDY_PARSER, ItShouldParse)
   ASSERT_EQ(testHtml, output);
 }
 
+TEST(MADDY_PARSER, ItShouldParseOneLiner)
+{
+  auto parser = std::make_shared<maddy::Parser>();
+  std::stringstream markdown("> This is a **test**");
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(
+    "<blockquote><p>This is a <strong>test</strong>  </p></blockquote>", output
+  );
+}
+
 TEST(MADDY_PARSER, ItShouldParseWithBitwiseConfig)
 {
   auto config = std::make_shared<maddy::ParserConfig>();
