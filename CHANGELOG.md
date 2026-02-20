@@ -14,7 +14,7 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
-* ...
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) HTML escaping in code blocks and inline code
 
 ## version 1.6.0 2025-07-26
 

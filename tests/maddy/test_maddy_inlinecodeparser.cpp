@@ -21,3 +21,17 @@ TEST(MADDY_INLINECODEPARSER, ItReplacesMarkdownWithCodeHTML)
 
   ASSERT_EQ(expected, text);
 }
+
+TEST(MADDY_INLINECODEPARSER, ItProperlyEscapesHTML)
+{
+  std::string text =
+    "some text `<h1>Test</h1>` text testing `<span>it</span>` out";
+  std::string expected =
+    "some text <code>&lt;h1&gt;Test&lt;/h1&gt;</code> text testing "
+    "<code>&lt;span&gt;it&lt;/span&gt;</code> out";
+  auto emphasizedParser = std::make_shared<maddy::InlineCodeParser>();
+
+  emphasizedParser->Parse(text);
+
+  ASSERT_EQ(expected, text);
+}

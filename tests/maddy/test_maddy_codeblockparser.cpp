@@ -74,3 +74,25 @@ TEST_F(MADDY_CODEBLOCKPARSER, ItShouldUseAnythingBehindFirstBackticksAsClass)
 
   ASSERT_EQ(expected, outputString);
 }
+
+TEST_F(MADDY_CODEBLOCKPARSER, ItProperlyEscapesHTML)
+{
+  std::vector<std::string> markdown = {
+    "```html", "<h1>Hello, World!</h1>", "```"
+  };
+
+  std::string expected =
+    "<pre class=\"html\"><code>\n&lt;h1&gt;Hello, "
+    "World!&lt;/h1&gt;\n</code></pre>";
+
+  for (std::string md : markdown)
+  {
+    cbParser->AddLine(md);
+  }
+  ASSERT_TRUE(cbParser->IsFinished());
+
+  std::stringstream& output(cbParser->GetResult());
+  const std::string& outputString = output.str();
+
+  ASSERT_EQ(expected, outputString);
+}

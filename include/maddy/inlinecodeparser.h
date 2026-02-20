@@ -9,6 +9,7 @@
 #include <regex>
 #include <string>
 
+#include "maddy/common.h"
 #include "maddy/lineparser.h"
 
 // -----------------------------------------------------------------------------
@@ -39,9 +40,23 @@ public:
   void Parse(std::string& line) override
   {
     static std::regex re("`([^`]*)`");
-    static std::string replacement = "<code>$1</code>";
+    std::smatch match;
+    std::string result;
 
-    line = std::regex_replace(line, re, replacement);
+    auto searchStart = line.cbegin();
+
+    while (std::regex_search(searchStart, line.cend(), match, re))
+    {
+      result.append(match.prefix());
+
+      result += "<code>" + common::escapeHTML(match[1].str()) + "</code>";
+
+      searchStart = match.suffix().first;
+    }
+
+    result.append(searchStart, line.cend());
+
+    line = std::move(result);
   }
 }; // class InlineCodeParser
 

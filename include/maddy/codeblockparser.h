@@ -11,6 +11,7 @@
 #include <string>
 
 #include "maddy/blockparser.h"
+#include "maddy/common.h"
 
 // -----------------------------------------------------------------------------
 
@@ -118,6 +119,8 @@ protected:
       this->isFinished = false;
       return;
     }
+
+    line = common::escapeHTML(line);
 
     line += "\n";
   }
