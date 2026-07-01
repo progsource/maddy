@@ -11,7 +11,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: "~3.25.0"  # <--= optional, use most recent 3.25.x version
