@@ -59,7 +59,7 @@ public:
    */
   static const std::string& version()
   {
-    static const std::string v = "1.6.0"; // MADDY_VERSION_LINE_REPLACEMENT
+    static const std::string v = "1.5.0";
     return v;
   }
 
@@ -278,10 +278,17 @@ private:
     }
     else if ((!this->config || (this->config->enabledParsers &
                                 maddy::types::TABLE_PARSER) != 0) &&
-             maddy::TableParser::IsStartingLine(line))
+             maddy::TableParser::IsStartingLine(
+               line,
+               !this->config || (this->config->enabledParsers &
+                                 maddy::types::MADDY_SPECIFIC_PARSER) != 0
+             ))
     {
       parser = std::make_shared<maddy::TableParser>(
-        [this](std::string& line) { this->runLineParser(line); }, nullptr
+        [this](std::string& line) { this->runLineParser(line); },
+        nullptr,
+        !this->config || (this->config->enabledParsers &
+                          maddy::types::MADDY_SPECIFIC_PARSER) != 0
       );
     }
     else if ((!this->config || (this->config->enabledParsers &

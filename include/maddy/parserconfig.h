@@ -44,8 +44,13 @@ enum PARSER_TYPE : uint32_t
   UNORDERED_LIST_PARSER    = 0b100000000000000000,
   LATEX_BLOCK_PARSER       = 0b1000000000000000000,
 
-  DEFAULT                  = 0b0111111111110111111,
-  ALL                      = 0b1111111111111111111,
+  // Not a parser of its own: gates maddy's own historical markdown dialect
+  // wherever a parser supports both that and a more standard alternative
+  // (currently just TableParser's `|table>` syntax vs. GFM pipe tables).
+  MADDY_SPECIFIC_PARSER    = 0b10000000000000000000,
+
+  DEFAULT                  = 0b10111111111110111111,
+  ALL                      = 0b11111111111111111111,
 };
 // clang-format on
 
