@@ -40,10 +40,13 @@ public:
    */
   void Parse(std::string& line) override
   {
+    // The leading and trailing `(_*)` groups absorb any leftover underscores
+    // from an unbalanced run (e.g. `__foo_` or `_foo____`), re-emitted
+    // outside the <em> tag instead of into its content.
     static std::regex re(
-      R"((?!.*`.*|.*<code>.*)_(?!.*`.*|.*<\/code>.*)([^_]*)_(?!.*`.*|.*<\/code>.*))"
+      R"((?!.*`.*|.*<code>.*)\b(_*)_(?![\s_])(?!.*`.*|.*<\/code>.*)(.*?[^\s])_(_*)\b(?!.*`.*|.*<\/code>.*))"
     );
-    static std::string replacement = "<em>$1</em>";
+    static std::string replacement = "$1<em>$2</em>$3";
 
     line = std::regex_replace(line, re, replacement);
   }
