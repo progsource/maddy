@@ -67,6 +67,18 @@ TEST(MADDY_PARSER, ItShouldParseInlineCodeInHeadlines)
   ASSERT_EQ(expectedHTML, output);
 }
 
+TEST(MADDY_PARSER, ItShouldAllowHeadingToInterruptParagraph)
+{
+  const std::string md = "Some text\n# m h dom mon dow oBusinessProcess\n## Usage\n";
+  const std::string expected =
+    "<p>Some text </p>"
+    "<h1>m h dom mon dow oBusinessProcess</h1>"
+    "<h2>Usage</h2>";
+  std::stringstream markdown(md);
+  auto parser = std::make_shared<maddy::Parser>();
+  ASSERT_EQ(expected, parser->Parse(markdown));
+}
+
 TEST(MADDY_PARSER, ItShouldNotParseInlineCodeInHeadlineIfDisabled)
 {
   const std::string headlineTest = R"(

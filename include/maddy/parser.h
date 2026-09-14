@@ -22,6 +22,7 @@
 #include "maddy/orderedlistparser.h"
 #include "maddy/paragraphparser.h"
 #include "maddy/quoteparser.h"
+#include "maddy/gfmtableparser.h"
 #include "maddy/tableparser.h"
 #include "maddy/unorderedlistparser.h"
 
@@ -135,6 +136,18 @@ public:
 
     for (std::string line; std::getline(markdown, line);)
     {
+      // ATX headings interrupt paragraphs (CommonMark §4.1)
+      if (currentBlockParser &&
+          dynamic_cast<maddy::ParagraphParser*>(currentBlockParser.get()) &&
+          (!this->config || (this->config->enabledParsers & maddy::types::HEADLINE_PARSER) != 0) &&
+          maddy::HeadlineParser::IsStartingLine(line))
+      {
+        std::string emptyLine = "";
+        currentBlockParser->AddLine(emptyLine);
+        result += currentBlockParser->GetResult().str();
+        currentBlockParser = nullptr;
+      }
+
       if (!currentBlockParser)
       {
         currentBlockParser = getBlockParserForLine(line);
@@ -274,6 +287,14 @@ private:
         [this](std::string& line) { this->runLineParser(line); },
         [this](const std::string& line)
         { return this->getBlockParserForLine(line); }
+      );
+    }
+    else if ((!this->config || (this->config->enabledParsers &
+                                maddy::types::GFM_TABLE_PARSER) != 0) &&
+             maddy::GfmTableParser::IsStartingLine(line))
+    {
+      parser = std::make_shared<maddy::GfmTableParser>(
+        [this](std::string& line) { this->runLineParser(line); }, nullptr
       );
     }
     else if ((!this->config || (this->config->enabledParsers &
