@@ -27,7 +27,7 @@ FetchContent_MakeAvailable(googletest)
 
 # ------------------------------------------------------------------------------
 
-file(GLOB_RECURSE MADDY_TESTS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/maddy/*.cpp)
+file(GLOB_RECURSE MADDY_TESTS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/maddy/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/maddy/*.h ${CMAKE_CURRENT_SOURCE_DIR}/../include/*.h)
 
 # ------------------------------------------------------------------------------
 

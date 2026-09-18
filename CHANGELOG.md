@@ -14,6 +14,9 @@ maddy uses [semver versioning](https://semver.org/).
 
 ## Upcoming
 
+* ![**ADDED**](https://img.shields.io/badge/-ADDED-%23099) New `maddy::types::MADDY_SPECIFIC_PARSER` config flag (on by default, keeping current behavior). Turning it off switches `TableParser` from maddy's own `|table>` sigil syntax to standard GitHub-flavored-Markdown pipe tables (which have no footer concept).
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Only create strong and emphasis tags at word boundaries, i.e. `not only_internal_underscores`.
+* ![**FIXED**](https://img.shields.io/badge/-FIXED-%23090) Correctly leave any leftover strong or emphasis delimiters outside the tag on either side, however many there are, i.e. `___text__` becomes `_<strong>text</strong>` and `_text_______` becomes `<em>text</em>______`.
 * ...
 
 ## version 1.6.0 2025-07-26

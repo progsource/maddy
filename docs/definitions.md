@@ -385,6 +385,53 @@ becomes
 ```
 table header and footer are optional
 
+This is maddy's own historical table syntax, and it's used by default
+(`maddy::types::MADDY_SPECIFIC_PARSER`). If you need standard
+GitHub-flavored-Markdown pipe tables instead, disable it in config:
+
+```cpp
+std::shared_ptr<maddy::ParserConfig> config = std::make_shared<maddy::ParserConfig>();
+config->enabledParsers &= ~maddy::types::MADDY_SPECIFIC_PARSER;
+
+std::shared_ptr<maddy::Parser> parser = std::make_shared<maddy::Parser>(config);
+std::string htmlOutput = parser->Parse(markdownInput);
+```
+
+After this, tables look like:
+
+```
+| Left header | middle header | last header |
+| --- | --- | --- |
+| cell 1 | cell 2 | cell 3 |
+| cell 4 | cell 5 | cell 6 |
+```
+becomes
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Left header</th>
+      <th>middle header</th>
+      <th>last header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>cell 1</td>
+      <td>cell 2</td>
+      <td>cell 3</td>
+    </tr>
+    <tr>
+      <td>cell 4</td>
+      <td>cell 5</td>
+      <td>cell 6</td>
+    </tr>
+  </tbody>
+</table>
+```
+GFM pipe tables have no footer concept, so this mode never produces a
+`<tfoot>`.
+
 ## LaTeX(MathJax) block support
 
 To turn on the LaTeX support - which basically is only a

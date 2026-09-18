@@ -9,6 +9,7 @@
 #include <regex>
 #include <string>
 
+#include "maddy/codespanutils.h"
 #include "maddy/lineparser.h"
 
 // -----------------------------------------------------------------------------
@@ -38,12 +39,14 @@ public:
    */
   void Parse(std::string& line) override
   {
-    static std::regex re(
-      R"((?!.*`.*|.*<code>.*)\~\~(?!.*`.*|.*<\/code>.*)([^\~]*)\~\~(?!.*`.*|.*<\/code>.*))"
-    );
+    static std::regex re(R"(\~\~([^\~]*)\~\~)");
     static std::string replacement = "<s>$1</s>";
 
-    line = std::regex_replace(line, re, replacement);
+    ApplyOutsideProtectedSpans(
+      line,
+      [](std::string& segment)
+      { segment = std::regex_replace(segment, re, replacement); }
+    );
   }
 }; // class StrikeThroughParser
 

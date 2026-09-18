@@ -82,3 +82,46 @@ TEST(MADDY_PARSER, ItShouldNotParseInlineCodeInHeadlineIfDisabled)
 
   ASSERT_EQ(expectedHTML, output);
 }
+
+TEST(MADDY_PARSER, ItShouldParseGfmTablesWhenMaddySpecificParserIsDisabled)
+{
+  const std::string tableTest =
+    "| Left header | middle header | last header |\n"
+    "| --- | --- | --- |\n"
+    "| cell 1 | cell 2 | cell 3 |\n"
+    "| cell 4 | cell 5 | cell 6 |\n";
+  const std::string expectedHTML =
+    "<table><thead><tr><th>Left header</th><th>middle header</th><th>last "
+    "header</th></tr></thead><tbody><tr><td>cell 1</td><td>cell 2</td><td>cell "
+    "3</td></tr><tr><td>cell 4</td><td>cell 5</td><td>cell "
+    "6</td></tr></tbody></table>";
+  std::stringstream markdown(tableTest);
+  auto config = std::make_shared<maddy::ParserConfig>();
+  config->enabledParsers &= ~maddy::types::MADDY_SPECIFIC_PARSER;
+  auto parser = std::make_shared<maddy::Parser>(config);
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(expectedHTML, output);
+}
+
+TEST(
+  MADDY_PARSER,
+  ItShouldNotParseMaddySpecificTableSyntaxWhenMaddySpecificParserIsDisabled
+)
+{
+  const std::string tableTest =
+    "|table>\n"
+    "A|B\n"
+    "- | - | -\n"
+    "1|2\n"
+    "|<table\n";
+  std::stringstream markdown(tableTest);
+  auto config = std::make_shared<maddy::ParserConfig>();
+  config->enabledParsers &= ~maddy::types::MADDY_SPECIFIC_PARSER;
+  auto parser = std::make_shared<maddy::Parser>(config);
+
+  const std::string output = parser->Parse(markdown);
+
+  ASSERT_EQ(std::string::npos, output.find("<table>"));
+}
